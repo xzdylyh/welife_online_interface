@@ -1,0 +1,56 @@
+name: 查询接口
+
+SEARCH_CASE1: #查询接口:/consume/all
+    Url: /consume/all
+    Case1: #查询接口:/consume/all
+        Desc: 查询接口/consume/all
+        ConsumeAll: {"begin_date":"2018-1-17 00:00:00","end_date":"2018-1-17 19:19:00","page":1,"shop_id":1905736354}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+SEARCH_CASE2: #消费记录列表
+    Url: /consume/list
+    Case1: #/consume/list
+        Desc: 消费记录列表
+        ConsumeList: {"begin_date":"2017-11-29","end_date":"2017-12-01","page":1,"shop_id2":1905736354,"is_allday":1,"is_all":"true","is_have_page":'true'}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+SEARCH_CASE3: #储值记录列表
+    Url: /charge/list
+    Case1: #储值记录列表/charge/list
+        Desc: 储值记录列表
+        ChargeList: {"begin_date":"2017-03-10","end_date":"2017-03-10","page":1,"sid2":1905736354,"cashier_id2":"1131294517","is_allday":1,"is_all":'True'}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+SEARCH_CASE4: #消费记录详情
+    Url: /consume/view
+    Case1: #/consume/view
+        Desc: 消费记录详情
+        ConsumeView: {"deal_id": "1608404823543030"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+SEARCH_CASE5: #用户消费记录
+    Url: /consume/user
+    Case1: #/consume/user
+        Desc: 用户消费记录
+        ConsumeUser: {"cno":"1802326514043775","begin_date":"2018-08-09","end_date":"2018-08-10","page":1,"shop_id2":1905736354}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+SEARCH_CASE6: #/coupon/overdue
+    Url: /coupon/overdue
+    Case1: #查询接口:/coupon/overdue
+        Desc: 查询接口:/coupon/overdue
+        CouponOverdue: {"cno":"1802326514043775","template_id2":8927448}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+SEARCH_CASE7: #指定会员储值记录列表
+    Url: /charge/user
+    Case1: #/charge/user
+        Desc: 指定会员储值记录列表
+        ChargeUser: {"cno":"1802326514043775","begin_date":"2018-08-09","end_date":"2018-08-10","page":1,"shop_id":1905736354}
+        Appid: dp3Go73mm5jUiuQaWDe4W

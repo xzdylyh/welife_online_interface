@@ -1,0 +1,14 @@
+NAME: 券数据
+
+couponSendAndCancel:
+    Case1:
+        Desc: 发券并撤销发券
+        #发券
+        CouponSendUrl: /coupon/send
+        CouponSend: {"cno":"1112937","template_id":8912529,"amount":1,"biz_id":444446,"shop_id":"1905736354"}
+
+        #撤销发券
+        CouponCancelUrl: /coupon/cancel
+        CouponCancel: {"biz_id":444446}
+
+        Appid: dp3Go73mm5jUiuQaWDe4W

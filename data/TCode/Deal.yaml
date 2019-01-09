@@ -1,0 +1,29 @@
+name: 交易模块数据
+
+DEAL_CASE1: #当日交易计录统计/consume/today
+    Url: /consume/today
+    Case1: #当日交易计录统计
+        Desc: 当日交易计录统计/consume/today
+        ConsumeToday: {"begin_time":"10:00","end_time":"15:00"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+DEAL_CASE2: #当获取交易/储值支付方式/deal/getpaytype
+    Url: /deal/getpaytype
+    Case1: #当获取交易/储值支付方式
+        Desc: 当获取交易/储值支付方式 - 交易
+        DealGetPayType: {"optype":"consume"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case2: #当获取交易/储值支付方式
+        Desc: 当获取交易/储值支付方式 - 储值
+        DealGetPayType: {"optype":"charge"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+DEAL_CASE3: #/deal/sendnotification
+    Url: /deal/sendnotification
+    Case1: #/deal/sendnotification
+        Desc: /deal/sendnotification
+        DealSendnotification: {"biz_id":"20180814153201009"}
+        Appid: dp3Go73mm5jUiuQaWDe4W

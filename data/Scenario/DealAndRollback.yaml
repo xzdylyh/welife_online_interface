@@ -1,0 +1,14 @@
+NAME: 交易冲正
+DealAndRollback:
+    Case1:
+        Desc: 消费并冲正场景 消费预览->冲正
+
+        #消费预览
+        DealPreviewUrl: /deal/preview
+        DealPreview: {"cno":"1802326514043775","shop_id":"1905736354","cashier_id":"1180940478","consume_amount":100,"sub_balance":100,"sub_credit":0,"payment_amount":0,"credit_amount":0,"payment_mode":1,"count_num":2,"biz_id":8036,"table_id":"A023"}
+
+        #消费冲正
+        DealRollbackUrl: /deal/rollback
+        DealRollback: {"biz_id":"8043"}
+
+        Appid: dp3Go73mm5jUiuQaWDe4W

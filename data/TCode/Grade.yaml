@@ -1,0 +1,31 @@
+name: 等级接口
+
+GRADE_CASE1: #查看等级设置/grade/rule
+    Url: /grade/rule
+    Case1: #查看等级设置
+        Desc: 查看等级设置
+        GradeRule: {}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+GRADE_CASE2: #查询会员等级信息/user/grade
+    Url: /user/grade
+    Case1: #查询会员等级信息
+        Desc: 根据电子卡，查询会员等级信息
+        UserGrade: {"cno":"1114192"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case2: #查询会员等级信息
+        Desc: 根据会员卡，查询会员等级信息
+        UserGrade: {"cno":"1802326514043775"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case3: #查询会员等级信息
+        Desc: 根据手机号，查询会员等级信息
+        UserGrade: {"cno":"13718651998"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case4: #查询会员等级信息
+        Desc: 根据实体卡磁道号，查询会员等级信息
+        UserGrade: {"cno":"541802326514043775023265140437"}
+        Appid: dp3Go73mm5jUiuQaWDe4W

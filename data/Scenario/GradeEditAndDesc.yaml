@@ -1,0 +1,18 @@
+name: 会员
+Grade:
+    Case1: #会员升级按后台规则自动降级流程: 手工调整储值金额增加200-->会员升级-->手工调整储值减少200(达到降级)
+        Desc: 手工调整储值增加200；会员自动升级；手工调整储值减少200；会员自动降级
+        #手工调整储值增加金额200
+        ChargeChangeUrl: /charge/change
+        ChargeChangeAdd: {"cno":"1809053705842575","shop_id":1966766829,"cashier_id":"1150741007","money":20000,"award_money":0,"change_type":1,"remark":"test"}
+
+        #会员升级:先在商家后台维护,升降级规则
+        GradeEditUrl: /grade/edit
+        GradeEdit: {"cno":"1809053705842575","grid":3011967,"type":1,"sid":1966766829,"cashier_id":"1150741007"}
+
+        #手工调整储值减少.
+        ChargeChange: {"cno":"1809053705842575","shop_id":1966766829,"cashier_id":"1150741007","money":20000,"award_money":0,"change_type":2,"remark":"test"}
+
+        #不同门店 id不同
+        Appid: dp0lAFoLhPE9sr0inINQaPKo
+        Appkey: 656cd7e0d25d5a2f075467103caac370

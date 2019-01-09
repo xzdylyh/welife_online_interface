@@ -1,0 +1,28 @@
+name: 标签接口
+
+TAGS_CASE1: #用户增加标签/tag/touser
+    Url: /tag/touser
+    Case1: #为用户增加多个标签
+        Desc: 为用户增加多个标签
+        TagToUser: {"cno":"1802326514043775","tags":["不喜欢羊肉","喜欢吃辣"]}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+TAGS_CASE2: #用户标签列表
+    Url: /tag/listusertags
+    Case1: #/tag/listusertags
+        Desc: 用户标签列表- 全部
+        TagListUserTags: {"cno":"1802326514043775","category":0}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case2: #/tag/listusertags
+        Desc: 用户标签列表- POS消费
+        TagListUserTags: {"cno":"1802326514043775","category":1}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case3: #/tag/listusertags
+        Desc: 用户标签列表- 菜品标签
+        TagListUserTags: {"cno":"1802326514043775","category":4}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
