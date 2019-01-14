@@ -91,6 +91,7 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
         )
         self.assertEquals(commitResult['errcode'], 0, commitResult['errmsg']) #储值提交
 
+
         '''--------------------------交易预览----------------------'''
         biz_id_03 = scripts.rndTimeStr() + '009'
         data['DealPreview']['biz_id'] = biz_id_03
@@ -290,7 +291,6 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
         #交易预览
         biz_id_01 = scripts.rndTimeStr() +'012'
         data['DealPreview']['biz_id'] = biz_id_01
-
         # 整合数据，调用接口，获取返回结果
         reviewResult = scripts.loadtestInterface(
             instance=HttpWebRequest(),instance_pro='post',data=data['DealPreview'],appid=data['Appid'],
@@ -299,11 +299,8 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
         #断言
         self.assertEqual(reviewResult['errcode'],0,reviewResult['errmsg']) #消费预览断言
 
-
-
         #交易冲正
         data['DealRollback']['biz_id'] = biz_id_01
-
         # 整合数据，调用接口，获取返回结果
         rollResult = scripts.loadtestInterface(
             instance=HttpWebRequest(),instance_pro='post',data=data['DealRollback'],appid=data['Appid'],
@@ -312,7 +309,15 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
         #断言
         self.assertEqual(rollResult['errcode'],0,rollResult['errmsg']) #交易冲正断言
 
-
+        #交易提交，冲正之后不允许提交3032交易异常
+        data['DealCommit']['biz_id'] = biz_id_01
+        # 整合数据，调用接口，获取返回结果
+        commitResult = scripts.loadtestInterface(
+            instance=HttpWebRequest(),instance_pro='post',data=data['DealCommit'],appid=data['Appid'],
+            desc=data['Desc'],url=data['DealCommitUrl']
+        )
+        #断言
+        self.assertEqual(commitResult['errcode'],3032,commitResult['errmsg']) #交易冲正断言
 
 
     @unittest.skipIf(scripts.getRunFlag('testCouponSendAndAdjust')=='N','验证执行配置')
@@ -384,7 +389,7 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
             desc=data['Desc'],
             url=data['ChargePreviewUrl']
         )
-        self.assertEquals(res['errcode'], 0, res['errmsg']) #交易预览断言
+        self.assertEquals(res['errcode'], data['ChargeAssertCode'], res['errmsg']) #交易预览断言
 
         '''step-2--------------------------交易提交接口----------------------'''
         data['ChargeCommit']['biz_id'] = biz_id_01
@@ -398,9 +403,24 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
             desc=data['Desc'],
             url=data['ChargeCommitUrl']
         )
-        self.assertEquals(commitResult['errcode'], 0, commitResult['errmsg']) #交易提交断言
+        self.assertEquals(commitResult['errcode'], data['CommitAssertCode'], commitResult['errmsg']) #交易提交断言
 
-        '''step-3--------------------------用户可开发票查询接口----------------------'''
+
+        '''step-3--------------------------设置是否开发票----------------------'''
+        data['ChargeReceipt']['biz_id'] = str(biz_id_01)
+        # 整合数据，调用接口，获取返回结果
+        setReceipt = scripts.loadtestInterface(
+            instance=HttpWebRequest(),
+            instance_pro='post',
+            data=data['ChargeReceipt'],
+            appid=data['Appid'],
+            desc=data['Desc'],
+            url=data['ChargeReceiptUrl']
+        )
+        self.assertEquals(setReceipt['errcode'], data['ReceiptAssertCode'], setReceipt['errmsg'])
+        self.assertTrue(setReceipt['res']['result']=="SUCCESS")
+
+        '''step-4--------------------------用户可开发票查询接口----------------------'''
         # 整合数据，调用接口，获取返回结果
         selectResult = scripts.loadtestInterface(
             instance=HttpWebRequest(),
@@ -410,10 +430,10 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
             desc=data['Desc'],
             url=data['ChargeReceiptstatUrl']
         )
-        self.assertEquals(selectResult['errcode'], 0, selectResult['errmsg'])
+        self.assertEquals(selectResult['errcode'], data['ReceiptstatAssertCode'], selectResult['errmsg'])
         self.assertTrue(selectResult['res'])
 
-        '''step-4--------------------------开发票接口----------------------'''
+        '''step-5--------------------------开发票接口----------------------'''
         data['ChargeReceiptbatch']['biz_id'] = str(biz_id_01)
         # 整合数据，调用接口，获取返回结果
         batchResult = scripts.loadtestInterface(
@@ -424,7 +444,7 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
             desc=data['Desc'],
             url=data['ChargeReceiptbatchUrl']
         )
-        self.assertEquals(batchResult['errcode'], 0, batchResult['errmsg'])
+        self.assertEquals(batchResult['errcode'], data['batchAssertCode'], batchResult['errmsg'])
         self.assertTrue(batchResult['res']['result']=="开发票成功")
 
 

@@ -57,3 +57,15 @@ CHARGE_CASE6: #pos储值记录详情/pos/chargedetail
         Desc: 查询指定流水号储值记录详情/pos/chargedetail
         PosChargeDetail: {"tcId":'71608222238572709'}
         Appid: dp3Go73mm5jUiuQaWDe4W
+
+CHARGE_CASE7: #储值调整/charge/change
+    Url: /charge/change
+    Case1: #储值调整
+        Desc: 手工调整储值-增加
+        ChargeChange: {"cno":'1586313587095560',"shop_id":'1905736354',"money":100,"award_money":0,"change_type":1,"remark":'测试手工调整增加'}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case2: #储值调整
+        Desc: 手工调整储值-减少
+        ChargeChange: {"cno":'1586313587095560',"shop_id":'1905736354',"money":100,"award_money":0,"change_type":2,"remark":'测试手工调整减少'}
+        Appid: dp3Go73mm5jUiuQaWDe4W

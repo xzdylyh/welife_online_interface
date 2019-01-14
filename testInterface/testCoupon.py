@@ -1,10 +1,10 @@
 #_*_coding:utf-8_*_
 import unittest,os,ddt,json
-from interface_project.globalVar import gl
-from interface_project.library import HTMLTESTRunnerCN
+from globalVar import gl
+from library import HTMLTESTRunnerCN
 
-from interface_project.library import scripts
-from interface_project.library.http import HttpWebRequest
+from library import scripts
+from library.http import HttpWebRequest
 
 @ddt.ddt
 class TestCoupon(unittest.TestCase):
@@ -150,6 +150,21 @@ class TestCoupon(unittest.TestCase):
         self.assertEqual(res['errcode'],0,res['errmsg']) #断言查询用户下一张券的信息接口
         self.assertTrue(res['res'].has_key('status'))
 
+    @ddt.data(*(scripts.loadDdtData(filename='Coupon.yaml',caseflag='COUPON_CASE8')))
+    def testCouponC2uinfo(self,data):
+        '''券接口:手工调整核销券/coupon/adjust'''
+
+        # 整合数据，调用接口，获取返回结果
+        res = scripts.loadtestInterface(
+            instance=HttpWebRequest(),
+            instance_pro='post',
+            data=data['CouponAdjust'],
+            appid=data['Appid'],
+            desc=data['Desc'],
+            url=data['Url']
+        )
+        #断言
+        self.assertEqual(res['errcode'],3119,res['errmsg']) #断言手工调整核销券/coupon/adjust
 
 
 if __name__=="__main__":

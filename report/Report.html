@@ -168,19 +168,19 @@ function hidden_case() {
 <div class='heading'>
 <h4 style="font-family: Microsoft YaHei">接口自动化测试报告</h4>
 <p class='attribute'><strong>测试人员 : </strong> yhleng</p>
-<p class='attribute'><strong>开始时间 : </strong> 2019-01-07 17:34:42</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:06.735000</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 1，通过 1，通过率= 100.00%</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-01-14 15:17:50</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:12.852000</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 5，通过 4，失败 1，通过率= 80.00%</p>
 
 <p class='description'>详细测试用例结果</p>
 </div>
 
 
 <p id='show_detail_line'>
-<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
-<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
-<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
-<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 1 }</a>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 80.00% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 1 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 4 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 5 }</a>
 </p>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
@@ -200,31 +200,152 @@ function hidden_case() {
     <td>详细</td>
 </tr>
 
-<tr class='passClass warning'>
-    <td>TestScenario: 点评微生活－API接口场景</td>
+<tr class='failClass warning'>
+    <td>TestManage: 商户管理模块</td>
+    <td class="text-center">5</td>
+    <td class="text-center">4</td>
     <td class="text-center">1</td>
-    <td class="text-center">1</td>
-    <td class="text-center">0</td>
     <td class="text-center">0</td>
     <td class="text-center">
-        <a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a>
+        <a href="javascript:showClassDetail('c1',5)" class="detail" id='c1'>详细</a>
         <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
     </td>
     
 </tr>
 
 <tr id='pt1_1' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>testGradeEditAndDesc_1: 会员升级降级:储值调整增加200->会员升级->储值调整减少200</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+    <td class='passCase'><div class='testcase'>testCashierlist_1: 商家接口:获取收银员列表/cashier/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt1_1: 用例描述--&gt;获取收银员列表-0页
+请求:/cashier/list
+{"shop_id": 1905736354, "page": 0}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"username": "天枢", "shop_id": "1905736354", "nickname": "天枢", "cashier_id": "1125497197"}, {"username": "测试草莓", "shop_id": "1905736354", "nickname": "测试草莓", "cashier_id": "1110948608"}, {"username": "接口自动化测试", "shop_id": "1905736354", "nickname": "接口自动化测试", "cashier_id": "1180940478"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testEmployee_1: 商家接口:查询员工/employee/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt1_2: 用例描述--&gt;查询员工
+请求:/employee/list
+{"shop_id": 1905736354}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"employee_phone": "13718651997", "employee_id": "", "employee_name": "天枢"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='failCase'><div class='testcase'>testPosshopcredit_1: 消费检测券接口/pos/checkusecoupon</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>失败</button>
+    <div id='div_ft1_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>失败</button>
+    <div id='div_ft1_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+ft1_3: 用例描述--&gt;消费检测券接口
+请求:/pos/checkusecoupon
+{"coupon_ids": ["1622600015456493729"], "uid": "41620900609049348"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 10009, "errmsg": "尚未登录"}
+Traceback (most recent call last):
+  File "D:\test_project\venv\online_interface_venv\lib\site-packages\ddt.py", line 144, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:/test_project/project/online_interface/testInterface/testManage.py", line 127, in testPosshopcredit
+    self.assertEqual(res['errcode'], 0, res['errmsg'])
+AssertionError: 尚未登录
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testPossignin_1: 商家接口:收银员账号登陆签到/pos/signin</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt1_4: 用例描述--&gt;收银员账号登陆签到
+请求:/pos/signin
+{"username": 13800138953, "password": 123456, "shop_id": 3291166425}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"shop_id": "3291166425", "cashier_id": "1146073508", "brand_name": "天空之城", "shop_name": "南锣鼓巷店"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testShoplist_1: 商家接口:获取门店列表/shop/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt1_5: 用例描述--&gt;获取门店列表
+请求:/shop/list
+{}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"shop_longitude": "116.42093", "shop_address": "东四十条110号", "service_start": "2018-04-11", "shop_latitude": "39.93373", "shop_name": "东四十条店", "shop_id": "1866053542", "service_end": "2019-04-11"}, {"shop_longitude": "116.392081", "shop_address": "奥林匹克公园地铁站", "service_start": "2018-04-11", "shop_latitude": "40.002184", "shop_name": "奥林匹克公园店", "shop_id": "1905736354", "service_end": "2019-04-11"}, {"shop_longitude": "116.40701912701414", "shop_address": "南锣鼓巷", "service_start": "2018-03-28", "shop_latitude": "39.93627430054968", "shop_name": "南锣鼓巷店", "shop_id": "3291166425", "service_end": "2019-03-28"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
 </tr>
 
 <tr id='total_row' class="text-center active">
     <td>总计</td>
-    <td>1</td>
+    <td>5</td>
+    <td>4</td>
     <td>1</td>
     <td>0</td>
-    <td>0</td>
-    <td>通过率：100.00%</td>
+    <td>通过率：80.00%</td>
 </tr>
 </table>
 

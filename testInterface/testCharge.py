@@ -1,10 +1,10 @@
 #_*_coding:utf-8_*_
 import unittest,os,ddt,json
-from interface_project.globalVar import gl
-from interface_project.library import HTMLTESTRunnerCN
+from globalVar import gl
+from library import HTMLTESTRunnerCN
 
-from interface_project.library import scripts
-from interface_project.library.http import HttpWebRequest
+from library import scripts
+from library.http import HttpWebRequest
 
 @ddt.ddt
 class TestCharge(unittest.TestCase):
@@ -36,7 +36,21 @@ class TestCharge(unittest.TestCase):
         self.assertEqual(res['errcode'],0,res['errmsg'])
         self.assertTrue(res['res'].has_key('shop_offline'))
 
+    @ddt.data(*(scripts.loadDdtData(filename='Charge.yaml',caseflag='CHARGE_CASE7')))
+    def testChargeChange(self, data):
+        '''储值模块:手工调整储值/charge/change'''
 
+        # 整合数据，调用接口，获取返回结果
+        res = scripts.loadtestInterface(
+            instance=HttpWebRequest(),
+            instance_pro='post',
+            data=data['ChargeChange'],
+            appid=data['Appid'],
+            desc=data['Desc'],
+            url=data['Url']
+        )
+        #断言
+        self.assertEqual(res['errcode'],0,res['errmsg'])
 
     @ddt.data(*(scripts.loadDdtData(filename='Charge.yaml',caseflag='CHARGE_CASE2')))
     def testChargeReceipt(self,data):

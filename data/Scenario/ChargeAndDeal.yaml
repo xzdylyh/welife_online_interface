@@ -33,11 +33,11 @@ ChargeAndDeal: #用例数据集
 #
     Case1: #现金消费>>>按消费金额赠送
         #case描述
-        Desc: 现金消费>>>按消费金额赠送
+        Desc: 积分与储值及券混合支付-现金消费>>>按消费金额赠送
 
         #储值预览
         ChargePreviewUrl: /charge/preview
-        ChargePreview: {"award_money2": 10, "biz_id": 37, "cashier_id": '1180940478', "charge_type": 1, "cno": '1802326514043775',"is_diy": "true", "money": '100', "recommenderecode2": 9002, "remark": "beizhu", "reward_money": '100',"shop_id": 1905736354}
+        ChargePreview: {"award_money2": 10, "biz_id": 37, "cashier_id": '1180940478', "charge_type": 1, "cno": '1353210023779896',"is_diy": "true", "money": '100', "recommenderecode2": 9002, "remark": "beizhu", "reward_money": '100',"shop_id": 1905736354}
 
         #储值提交
         ChargeCommitUrl: /charge/commit
@@ -45,7 +45,7 @@ ChargeAndDeal: #用例数据集
 
         #交易预览
         DealPreviewUrl: /deal/preview
-        DealPreview: {"cno":"1802326514043775","shop_id":1905736354,"cashier_id":"1180940478","consume_amount":100,"sub_balance":100,"sub_credit":0,"activity_ids2":["0"],"payment_amount":0,"credit_amount":0,"payment_mode":1,"count_num":2,"biz_id":8036,"table_id":"A023"}
+        DealPreview: {"cno":"1353210023779896","shop_id":1905736354,"cashier_id":"1180940478","consume_amount":300,"sub_balance":100,"sub_credit":2,"deno_coupon_ids":[],"gift_coupons_ids":['1622348377116509737'],"payment_amount":0,"credit_amount":0,"payment_mode":1,"count_num":2,"biz_id":8036,"table_id":"A023"}
 
         #交易提交
         DealCommitUrl: /deal/commit
@@ -56,10 +56,10 @@ ChargeAndDeal: #用例数据集
         DealCancel: {"biz_id":8036,"send_notification2":'false',"cashier_id":"1180940478"}
         Appid: dp3Go73mm5jUiuQaWDe4W
         Appkey: 3ea8bfbf0574b89ae6b9e4717a34f53f
-#
+
     Case2: #银行卡消费>>>按消费金额赠送
         #case描述
-        Desc: 银行卡消费>>>按消费金额赠送
+        Desc: 储值支付－银行卡消费>>>按消费金额赠送
 
         #储值预览
         ChargePreviewUrl: /charge/preview
@@ -86,7 +86,7 @@ ChargeAndDeal: #用例数据集
 
     Case3: #店内微信消费>>>按消费金额赠送
         #case描述
-        Desc: 店内微信消费>>>按消费金额赠送
+        Desc: 积分支付－店内微信消费>>>按消费金额赠送
 
         #储值预览
         ChargePreviewUrl: /charge/preview
@@ -98,7 +98,7 @@ ChargeAndDeal: #用例数据集
 
         #交易预览
         DealPreviewUrl: /deal/preview
-        DealPreview: {"cno":"1802326514043775","shop_id":1905736354,"cashier_id":"1180940478","consume_amount":100,"sub_balance":100,"sub_credit":0,"payment_amount":0,"credit_amount":0,"payment_mode":3,"count_num":2,"biz_id":8036,"table_id":"A023"}
+        DealPreview: {"cno":"1802326514043775","shop_id":1905736354,"cashier_id":"1180940478","consume_amount":100,"sub_balance":0,"sub_credit":1,"payment_amount":0,"credit_amount":0,"payment_mode":3,"count_num":2,"biz_id":8036,"table_id":"A023"}
 
         #交易提交
         DealCommitUrl: /deal/commit
@@ -113,11 +113,11 @@ ChargeAndDeal: #用例数据集
 
     Case4: #支付宝消费>>>按消费金额赠送
         #case描述
-        Desc: 支付宝消费>>>按消费金额赠送
+        Desc: 券支付-支付宝消费>>>按消费金额赠送
 
         #储值预览
         ChargePreviewUrl: /charge/preview
-        ChargePreview: {"award_money2": 10, "biz_id": 37, "cashier_id": '1180940478', "charge_type": 1, "cno": '1802326514043775',"is_diy": "true", "money": '100', "recommenderecode2": 9002, "remark": "beizhu", "reward_money": '100',"shop_id": 1905736354}
+        ChargePreview: {"award_money2": 10, "biz_id": 37, "cashier_id": '1180940478', "charge_type": 1, "cno": '1353210023779896',"is_diy": "true", "money": '100', "recommenderecode2": 9002, "remark": "beizhu", "reward_money": '100',"shop_id": 1905736354}
 
         #储值提交
         ChargeCommitUrl: /charge/commit
@@ -125,7 +125,7 @@ ChargeAndDeal: #用例数据集
 
         #交易预览
         DealPreviewUrl: /deal/preview
-        DealPreview: {"cno":"1802326514043775","shop_id":1905736354,"cashier_id":"1180940478","consume_amount":100,"sub_balance":100,"sub_credit":0,"payment_amount":0,"credit_amount":0,"payment_mode":4,"count_num":2,"biz_id":8036,"table_id":"A023"}
+        DealPreview: {"cno":"1353210023779896","shop_id":1905736354,"cashier_id":"1180940478","consume_amount":100,"sub_balance":0,"deno_coupon_ids":[],"gift_coupons_ids":['1622348377116509737'],"sub_credit":0,"payment_amount":0,"credit_amount":0,"payment_mode":4,"count_num":2,"biz_id":8036,"table_id":"A023"}
 
         #交易提交
         DealCommitUrl: /deal/commit

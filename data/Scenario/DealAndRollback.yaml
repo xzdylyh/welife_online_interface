@@ -1,7 +1,7 @@
 NAME: 交易冲正
 DealAndRollback:
     Case1:
-        Desc: 消费并冲正场景 消费预览->冲正
+        Desc: 消费并冲正场景 消费预览->冲正->交易提交(反正用例)
 
         #消费预览
         DealPreviewUrl: /deal/preview
@@ -10,5 +10,9 @@ DealAndRollback:
         #消费冲正
         DealRollbackUrl: /deal/rollback
         DealRollback: {"biz_id":"8043"}
+
+        #交易提交
+        DealCommitUrl: /deal/commit
+        DealCommit: {"biz_id": "8043", "verify_code":"000000"}
 
         Appid: dp3Go73mm5jUiuQaWDe4W

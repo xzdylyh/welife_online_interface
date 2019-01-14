@@ -189,14 +189,14 @@ def loadtestInterface(**kwargs):
     #调用接口,需注意的是，aetatt，接口函数，必须@property装饰成属性
     viewResult = getattr(view, kwargs['instance_pro'])
 
-    # """报告输出，格式模版"""
-    # print OUT_TMPL.format(
-    #     kwargs['desc'],
-    #     kwargs['url'],
-    #     json.dumps(kwargs['data']).decode('unicode-escape'),
-    #     kwargs['appid'],
-    #     json.dumps(viewResult).decode('unicode-escape')
-    # )
+    """报告输出，格式模版"""
+    print OUT_TMPL.format(
+        kwargs['desc'],
+        kwargs['url'],
+        json.dumps(kwargs['data']).decode('unicode-escape'),
+        kwargs['appid'],
+        json.dumps(viewResult).decode('unicode-escape')
+    )
 
     return viewResult
 

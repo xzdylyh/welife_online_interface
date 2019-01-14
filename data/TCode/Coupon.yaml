@@ -7,6 +7,10 @@ COUPON_CASE1: #发券
         CouponSend: {"cno":"1114192","template_id":8912529,"amount":1,"biz_id":40,"shop_id":"1905736354"}
         Appid: dp3Go73mm5jUiuQaWDe4W
 
+    Case2: #/coupon/send
+        Desc: 发券-券包使用的模版
+        CouponSend: {"cno":"1586313587095560","template_id":8927448,"amount":1,"biz_id":41,"shop_id":"1905736354"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
 
 COUPON_CASE2: #券模板详情
     Url: /coupon/detail
@@ -29,7 +33,7 @@ COUPON_CASE4: #根据卡号查询券列表
     Url: /user/getusercoupons
     Case1: #/user/getusercoupons
         Desc: 根据卡号查询券列表
-        UserGetusercoupons: {"cno":"1802326514043775"}
+        UserGetusercoupons: {"cno":"1586313021715287"}
         Appid: dp3Go73mm5jUiuQaWDe4W
 
 
@@ -51,6 +55,13 @@ COUPON_CASE6: #根据biz_id查询发券详情
 COUPON_CASE7: #查询用户下一张券的信息
     Url: /coupon/c2uinfo
     Case1: #/coupon/c2uinfo
-        Desc: 查询用户下一张券的信息
+        Desc: 查询用户一张券的信息
         CouponC2uinfo: {"cno":"1114192","c2u_id":"1608395696572319862"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+COUPON_CASE8: #手工调帐核销券
+    Url: /coupon/adjust
+    Case1: #手工调帐核销券/coupon/adjust
+        Desc: 手工调帐核销券-带券包不可调帐(反向用例)
+        CouponAdjust: {"cno":"1586313021715287","coupon_ids":["1622600015456493729"],"cashier_id":"1131294517","shop_id":"1905736354","remark":"手工调帐带券包"}
         Appid: dp3Go73mm5jUiuQaWDe4W

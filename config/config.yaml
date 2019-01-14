@@ -12,7 +12,7 @@ EMAIL:
     Password: YHleng870120
     Msg_Title: 线上-接口自动化测试结果
     #Receivers: ['lengyaohui@163.com']  #收件人
-    Receivers: ['lengyaohui@163.com','wangyan.bj@acewill.cn','cch@acewill.cn','gzx@acewill.cn','huxl@acewill.cn','jtt@acewill.cn','maming@acewill.cn'] #收件人
+    Receivers: ['lengyaohui@163.com','yechangchun.bj@acewill.cn','wangchaoying.bj@acewill.cn','lilong.bj@acewill.cn','wangyan.bj@acewill.cn','cch@acewill.cn','gzx@acewill.cn','huxl@acewill.cn','jtt@acewill.cn','maming@acewill.cn'] #收件人
     From: 自动化测试系统
     To: 微生活测试组
 
@@ -21,10 +21,10 @@ RUNING:
     testCouponSendAndCancel: {'Flag':'N'} #发券并撤销业务场景:发券->撤销
     testChargeAndCancel: {'Flag':'N'} #储值撤销场景:储值预览->储值提交->储值撤销
     testChargeAndDeal: {'Flag':'N'} #自定义充值并消费储值业务场景:储值预览->储值提交->交易预览->交易提交->交易撤销
-    testGradeEditAndDesc: {'Flag':'Y'} #会员升级降级:会员升级->储值调整
+    testGradeEditAndDesc: {'Flag':'N'} #会员升级降级:会员升级->储值调整
     testCouponOtherSendAndCancel: {'Flag':'N'} #异业营销发券并撤销场景: 获取异业营销活动列表->异业营销发券->异业营销券码核销
     testCouponCmbSendAndCancel: {'Flag':'N'} #'''异业营销cmb发券并撤销场景: 获取异业营销活动列表->异业营销cmb发券->异业营销券码核销'''
-    testDealAndRollback: {'Flag':'N'} #消费并冲正场景: 消费预览->冲正
+    testDealAndRollback: {'Flag':'Y'} #消费并冲正场景: 消费预览->冲正
     testCouponSendAndAdjust: {'Flag':'N'} #发券并手工调账核销券:发券->获取用户账户信息->手工调账核销券
     testChargeAndReceipt: {'Flag':'N'}     #储值并开发票场景:储值预览->储值提交->可开发票查询->开发票
 

@@ -3,7 +3,7 @@ NAME: 储值取消业务场景数据
 ChargeAndCancel:
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>按自定义储值>>验证储值支付方式>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     Case1: #自定义储值方式->现金储值
-        Desc: 自定义储值方式->现金储值
+        Desc: 实体卡储值-自定义储值方式->现金储值
 
         #储值预览
         ChargePreviewUrl: /charge/preview
@@ -43,11 +43,11 @@ ChargeAndCancel:
 
 
     Case3: #自定义储值方式->微信储值
-        Desc: 自定义储值方式->微信储值
+        Desc: 电子卡储值-自定义储值方式->微信储值
 
         #储值预览
         ChargePreviewUrl: /charge/preview
-        ChargePreview: {"cno":"1802326514043775","shop_id":1905736354,"cashier_id":"1180940478","money":"100","award_money2":10,"reward_money":"100","is_diy":'true',"charge_type":5,"remark":"beizhu","biz_id":"37","recommenderecode2":9002}
+        ChargePreview: {"cno":"1112937","shop_id":1905736354,"cashier_id":"1180940478","money":"100","award_money2":10,"reward_money":"100","is_diy":'true',"charge_type":5,"remark":"beizhu","biz_id":"37","recommenderecode2":9002}
 
         #储值提交
         ChargeCommitUrl: /charge/commit

@@ -9,7 +9,7 @@ CREDIT_CASE1: #手工调整积分/credit/change
 
     Case2: #减少积分
         Desc: 减少积分
-        CreditChange: {"cno":"1802326514043775", "cashier_id":"1180940478", "shop_id":"1905736354", "type":2, "credit":1, "remark":"heihei", "biz_id":518}
+        CreditChange: {"cno":"1802326514043775", "cashier_id":"1180940478", "shop_id":"1905736354", "type":2, "credit":1, "remark":"heihei", "biz_id":518, "notice":'-1'}
         Appid: dp3Go73mm5jUiuQaWDe4W
 
 
