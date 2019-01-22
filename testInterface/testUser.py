@@ -35,7 +35,8 @@ class TestUser(unittest.TestCase):
             data=data['UserAccount'],
             appid=data['Appid'],
             desc=data['Desc'],
-            url=data['Url']
+            url=data['Url'],
+            Appkey= data['Appkey']
         )
         #断言
         self.assertEqual(res['errcode'], 0, res['errmsg'])

@@ -6,6 +6,12 @@ USER_CASE1: #获取用户账户信息
         Desc: 获取用户账户信息
         UserAccount: {"cno":"1112937"}
         Appid: dp3Go73mm5jUiuQaWDe4W
+        Appkey: 3ea8bfbf0574b89ae6b9e4717a34f53f
+    Case2:
+        Desc: 获取用户账户信息
+        UserAccount: {"cno":"1112937","shop_id":"1905736354"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+        Appkey: 3ea8bfbf0574b89ae6b9e4717a34f53f
 
 
 USER_CASE2: #获取微信用户账户信息
@@ -145,4 +151,39 @@ USER_CASE16: #手机开卡
     Case5:
         Desc: 手机开卡_参数全部输入
         UserPhoneCard: {"phone":"13718651995","shop_id":"1905736354","grade":0,"is_gift":0}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+USER_CASE17: #查询会员等级信息
+    Url: /user/grade
+    Case1:
+        Desc: 查询会员等级信息-电子卡
+        UserGrade: {"cno":"1114192"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Case2:
+        Desc: 查询会员等级信息-实体卡
+        UserGrade: {"cno":"1802326514043775"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+    Case3:
+        Desc: 查询会员等级信息-手机号
+        UserGrade: {"cno":"13718651995"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+    Case4:
+        Desc: 查询会员等级信息-磁道号
+        UserGrade: {"cno":"541353210663592444532106635924"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+
+USER_CASE18: #绑定/修改手机号
+    Url: /user/bindphone
+    Case1: #source_type:默认api,点餐类型：4
+        Desc: 绑定/修改手机号-来源api
+        BindPhone: {"cno":"1802326514043775", "phone":"13718651993", "source_type":"api"}
+        Appid: dp3Go73mm5jUiuQaWDe4W
+
+    Url: /user/bindphone
+    Case2: #source_type:默认api,点餐类型：4
+        Desc: 绑定/修改手机号-来源点餐
+        BindPhone: {"cno":"1802326514043775", "phone":"13718651994", "source_type":4}
         Appid: dp3Go73mm5jUiuQaWDe4W

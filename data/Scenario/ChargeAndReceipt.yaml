@@ -3,11 +3,11 @@ NAME: 储值并开发票业务场景
 ChargeAndReceipt:
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>储值并开发票业务场景>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     Case1: #自定义储值方式->现金储值->储值提交->设置是否可开发票->查询发票－>开发票
-        Desc: 储值并开发票
-
+        Desc: 储值并开发票(反向用例,已开发票,再去开发票)
+        #1586313021715287此卡需要无待开发票
         #储值预览
         ChargePreviewUrl: /charge/preview
-        ChargePreview: {"cno":"1802326514043775","shop_id":"1905736354","cashier_id":"1180940478","money":"100","award_money2":10,"reward_money":"100","is_diy":"true","charge_type":1,"remark":"beizhu","biz_id":"37","recommenderecode2":9002}
+        ChargePreview: {"cno":"1586313021715287","shop_id":"1905736354","cashier_id":"1180940478","money":"100","award_money2":10,"reward_money":"100","is_diy":"true","charge_type":1,"remark":"beizhu","biz_id":"37","recommenderecode2":9002}
         ChargeAssertCode: 0
 
         #储值提交
@@ -22,18 +22,18 @@ ChargeAndReceipt:
 
         #用户可开发票查询
         ChargeReceiptstatUrl: /charge/receiptstat
-        ChargeReceiptstat: {"cno":"1802326514043775","shop_id":"1905736354"}
+        ChargeReceiptstat: {"cno":"1586313021715287","shop_id":"1905736354"}
         ReceiptstatAssertCode: 0
 
         #储值开发票
         ChargeReceiptbatchUrl: /charge/receiptbatch
-        ChargeReceiptbatch: {"cno":"1802326514043775","shop_id":"1905736354","money":1,"biz_id":37,"cashier_id":"1180940478"}
-        batchAssertCode: 0
+        ChargeReceiptbatch: {"cno":"1586313021715287","shop_id":"1905736354","money":1,"biz_id":37,"cashier_id":"1180940478"}
+        batchAssertCode: 21013 #不存在的储值记录
 
         Appid: dp3Go73mm5jUiuQaWDe4W
 
     Case2: #自定义储值方式->现金储值->储值提交->设置是否可开发票->查询发票－>开发票
-        Desc: 储值并开发票(反向用例，设置不可开发票，再去开发票)
+        Desc: 储值并开发票
 
         #储值预览
         ChargePreviewUrl: /charge/preview

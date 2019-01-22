@@ -24,9 +24,9 @@ RUNING:
     testGradeEditAndDesc: {'Flag':'N'} #会员升级降级:会员升级->储值调整
     testCouponOtherSendAndCancel: {'Flag':'N'} #异业营销发券并撤销场景: 获取异业营销活动列表->异业营销发券->异业营销券码核销
     testCouponCmbSendAndCancel: {'Flag':'N'} #'''异业营销cmb发券并撤销场景: 获取异业营销活动列表->异业营销cmb发券->异业营销券码核销'''
-    testDealAndRollback: {'Flag':'Y'} #消费并冲正场景: 消费预览->冲正
+    testDealAndRollback: {'Flag':'N'} #消费并冲正场景: 消费预览->冲正
     testCouponSendAndAdjust: {'Flag':'N'} #发券并手工调账核销券:发券->获取用户账户信息->手工调账核销券
-    testChargeAndReceipt: {'Flag':'N'}     #储值并开发票场景:储值预览->储值提交->可开发票查询->开发票
+    testChargeAndReceipt: {'Flag':'Y'}     #储值并开发票场景:储值预览->储值提交->可开发票查询->开发票
 
 
 
