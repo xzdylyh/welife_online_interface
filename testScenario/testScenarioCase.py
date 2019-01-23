@@ -445,7 +445,7 @@ class TestScenario(unittest.TestCase):#点评微生活API接口
             url=data['ChargeReceiptbatchUrl']
         )
         self.assertEquals(batchResult['errcode'], data['batchAssertCode'], batchResult['errmsg'])
-        self.assertTrue(batchResult['res']['result']=="开发票成功")
+
 
 
 

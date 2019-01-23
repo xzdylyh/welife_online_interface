@@ -69,13 +69,13 @@ class run_test_case(object):
 
         # 测试结论
         if '100' in str(gl.get_value('passrate')):
-            msg_1 = '本次测试_★通过★.'
+            msg_1 = '本次测试★通过★'
         else:
-            msg_1 = '本次测试_★不通过★.'
+            msg_1 = '本次测试★不通过★'
 
         # 发送钉钉消息
-        msg = """线上接口自动化测试已完成,{}\n测试报告地址:http://60.205.217.8:5001/report/{}/{},{}"""
-        msg = msg.format(result_str, low_path, file_name, msg_1)
+        msg = """线上接口自动化测试已完成:{},{}\n测试报告地址:http://60.205.217.8:5001/report/{}/{}"""
+        msg = msg.format(result_str,msg_1 , low_path, file_name)
 
         return msg
 
@@ -113,7 +113,7 @@ class run_test_case(object):
         print(filePath)
 
         # 开始测试发送钉钉消息
-        # scripts.send_msg_dding('{}:★开始API接口自动化测试★......'.format(time_str))
+        scripts.send_msg_dding('{}:★开始API接口自动化测试★......'.format(time_str))
 
         # 执行测试并生成测试报告文件
         run_test_case.run(filePath)
@@ -124,7 +124,7 @@ class run_test_case(object):
         # 模版消息
         msg = run_test_case.tmpl_msg(low_path, run_test_case.file_name)
         print(msg)
-        # scripts.send_msg_dding(msg)
+        scripts.send_msg_dding(msg)
 
         # 发送测试报告To Email
         email = EmailClass()
