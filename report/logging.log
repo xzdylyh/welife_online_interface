@@ -27366,3 +27366,357 @@
 [2019-01-22 16:29:32] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/ugetinfo HTTP/1.1" 200 None
 [2019-01-22 16:29:35] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
 [2019-01-22 16:29:36] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/uopencard HTTP/1.1" 200 None
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testChargeAndCancel执行标记:N
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testChargeAndDeal执行标记:N
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testCouponSendAndCancel执行标记:N
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testGradeEditAndDesc执行标记:N
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testCouponCmbSendAndCancel执行标记:N
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testCouponOtherSendAndCancel执行标记:N
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testDealAndRollback执行标记:Y
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testCouponSendAndAdjust执行标记:N
+[2019-01-23 10:43:56] INFO [info: log.py, 20] testChargeAndReceipt执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testChargeAndCancel执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testChargeAndDeal执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testCouponSendAndCancel执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testGradeEditAndDesc执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testCouponCmbSendAndCancel执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testCouponOtherSendAndCancel执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testDealAndRollback执行标记:Y
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testCouponSendAndAdjust执行标记:N
+[2019-01-23 10:44:14] INFO [info: log.py, 20] testChargeAndReceipt执行标记:N
+[2019-01-23 10:44:15] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): dd.acewill.net
+[2019-01-23 10:44:16] DEBUG [_make_request: connectionpool.py, 396] https://dd.acewill.net:443 "GET /send.php?tk=5a3fb46f772033ce3f7a31e88e518c55f390708712de333dd1abaa06dd3c9f07&msg=20190123_104415:%E2%98%85%E5%BC%80%E5%A7%8BAPI%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E2%98%85...... HTTP/1.1" 200 None
+[2019-01-23 10:44:17] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:18] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/preview HTTP/1.1" 200 None
+[2019-01-23 10:44:21] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:21] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/rollback HTTP/1.1" 200 None
+[2019-01-23 10:44:24] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:24] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/commit HTTP/1.1" 200 None
+[2019-01-23 10:44:27] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:27] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/couponlist HTTP/1.1" 200 None
+[2019-01-23 10:44:30] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:30] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/creditlist HTTP/1.1" 200 None
+[2019-01-23 10:44:31] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:31] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/dynamic HTTP/1.1" 200 None
+[2019-01-23 10:44:34] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:34] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getoverduecoupons HTTP/1.1" 200 None
+[2019-01-23 10:44:37] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:37] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getc2uinfo HTTP/1.1" 200 None
+[2019-01-23 10:44:38] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:38] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getusedcoupons HTTP/1.1" 200 None
+[2019-01-23 10:44:39] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:39] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/mergeActualCard HTTP/1.1" 200 None
+[2019-01-23 10:44:41] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:42] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:44:45] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:45] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:44:48] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:48] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:44:50] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:50] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:44:52] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:52] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:44:53] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:53] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/sendcode HTTP/1.1" 200 None
+[2019-01-23 10:44:54] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:54] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/account HTTP/1.1" 200 None
+[2019-01-23 10:44:56] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:57] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/account HTTP/1.1" 200 None
+[2019-01-23 10:44:58] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:58] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/cardinfo HTTP/1.1" 200 None
+[2019-01-23 10:44:59] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:44:59] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/checkcard HTTP/1.1" 200 None
+[2019-01-23 10:45:01] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:01] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/edit HTTP/1.1" 200 None
+[2019-01-23 10:45:04] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:04] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getinfo HTTP/1.1" 200 None
+[2019-01-23 10:45:07] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:07] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/ugetinfo HTTP/1.1" 200 None
+[2019-01-23 10:45:10] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:11] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/uopencard HTTP/1.1" 200 None
+[2019-01-23 10:45:12] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:12] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/listusertags HTTP/1.1" 200 None
+[2019-01-23 10:45:13] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:13] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/listusertags HTTP/1.1" 200 None
+[2019-01-23 10:45:14] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:14] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/listusertags HTTP/1.1" 200 None
+[2019-01-23 10:45:16] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:16] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/touser HTTP/1.1" 200 None
+[2019-01-23 10:45:18] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:18] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/list HTTP/1.1" 200 None
+[2019-01-23 10:45:20] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:21] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/user HTTP/1.1" 200 None
+[2019-01-23 10:45:24] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:24] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/all HTTP/1.1" 200 None
+[2019-01-23 10:45:25] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:25] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/list HTTP/1.1" 200 None
+[2019-01-23 10:45:28] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:28] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/user HTTP/1.1" 200 None
+[2019-01-23 10:45:29] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:29] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/view HTTP/1.1" 200 None
+[2019-01-23 10:45:30] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:30] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/overdue HTTP/1.1" 200 None
+[2019-01-23 10:45:31] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:31] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /product/list HTTP/1.1" 200 None
+[2019-01-23 10:45:34] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:34] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /product/list HTTP/1.1" 200 None
+[2019-01-23 10:45:37] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:38] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /product/listbyuser HTTP/1.1" 200 None
+[2019-01-23 10:45:40] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:40] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /cashier/list HTTP/1.1" 200 None
+[2019-01-23 10:45:42] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:42] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /employee/list HTTP/1.1" 200 None
+[2019-01-23 10:45:43] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:43] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /pos/shopcredit HTTP/1.1" 200 None
+[2019-01-23 10:45:44] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:44] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /pos/signin HTTP/1.1" 200 None
+[2019-01-23 10:45:46] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:46] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /shop/list HTTP/1.1" 200 None
+[2019-01-23 10:45:48] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:48] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /grade/rule HTTP/1.1" 200 None
+[2019-01-23 10:45:51] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:51] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:45:54] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:54] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:45:58] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:45:58] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:46:01] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:01] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:46:04] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:04] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/today HTTP/1.1" 200 None
+[2019-01-23 10:46:07] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:07] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/getpaytype HTTP/1.1" 200 None
+[2019-01-23 10:46:09] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:09] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/getpaytype HTTP/1.1" 200 None
+[2019-01-23 10:46:12] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:12] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/sendnotification HTTP/1.1" 200 None
+[2019-01-23 10:46:14] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:14] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/shoprule HTTP/1.1" 200 None
+[2019-01-23 10:46:18] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:19] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/change HTTP/1.1" 200 None
+[2019-01-23 10:46:23] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:23] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/change HTTP/1.1" 200 None
+[2019-01-23 10:46:27] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:28] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/exchange HTTP/1.1" 200 None
+[2019-01-23 10:46:31] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:32] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/exchange HTTP/1.1" 200 None
+[2019-01-23 10:46:35] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:35] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/rule HTTP/1.1" 200 None
+[2019-01-23 10:46:38] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:38] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/adjust HTTP/1.1" 200 None
+[2019-01-23 10:46:40] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:40] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/list HTTP/1.1" 200 None
+[2019-01-23 10:46:42] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:42] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/sendsearch HTTP/1.1" 200 None
+[2019-01-23 10:46:45] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:45] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/detail HTTP/1.1" 200 None
+[2019-01-23 10:46:47] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:48] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/gift HTTP/1.1" 200 None
+[2019-01-23 10:46:51] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:51] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/send HTTP/1.1" 200 None
+[2019-01-23 10:46:55] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:55] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/send HTTP/1.1" 200 None
+[2019-01-23 10:46:58] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:46:58] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getusercoupons HTTP/1.1" 200 None
+[2019-01-23 10:47:00] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:01] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/change HTTP/1.1" 200 None
+[2019-01-23 10:47:04] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:04] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/change HTTP/1.1" 200 None
+[2019-01-23 10:47:05] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:06] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/receipt HTTP/1.1" 200 None
+[2019-01-23 10:47:08] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:08] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/receipt HTTP/1.1" 200 None
+[2019-01-23 10:47:11] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:11] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/rule HTTP/1.1" 200 None
+[2019-01-23 10:47:13] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:13] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/view HTTP/1.1" 200 None
+[2019-01-23 10:47:15] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:15] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/today HTTP/1.1" 200 None
+[2019-01-23 10:47:17] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:17] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /pos/chargedetail HTTP/1.1" 200 None
+[2019-01-23 10:47:19] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:19] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /activity/getuserthumbuplog HTTP/1.1" 200 None
+[2019-01-23 10:47:22] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:22] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /activity/otherlist HTTP/1.1" 200 None
+[2019-01-23 10:47:25] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:47:25] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /activity/list HTTP/1.1" 200 None
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testChargeAndCancel执行标记:N
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testChargeAndDeal执行标记:N
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testCouponSendAndCancel执行标记:N
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testGradeEditAndDesc执行标记:N
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testCouponCmbSendAndCancel执行标记:N
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testCouponOtherSendAndCancel执行标记:N
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testDealAndRollback执行标记:Y
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testCouponSendAndAdjust执行标记:N
+[2019-01-23 10:51:54] INFO [info: log.py, 20] testChargeAndReceipt执行标记:N
+[2019-01-23 10:51:56] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:51:57] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/preview HTTP/1.1" 200 None
+[2019-01-23 10:51:58] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:51:58] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/rollback HTTP/1.1" 200 None
+[2019-01-23 10:52:00] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:00] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/commit HTTP/1.1" 200 None
+[2019-01-23 10:52:02] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:02] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/couponlist HTTP/1.1" 200 None
+[2019-01-23 10:52:03] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:03] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/creditlist HTTP/1.1" 200 None
+[2019-01-23 10:52:05] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:05] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/dynamic HTTP/1.1" 200 None
+[2019-01-23 10:52:08] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:08] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getoverduecoupons HTTP/1.1" 200 None
+[2019-01-23 10:52:10] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:11] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getc2uinfo HTTP/1.1" 200 None
+[2019-01-23 10:52:14] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:14] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getusedcoupons HTTP/1.1" 200 None
+[2019-01-23 10:52:15] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:15] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/mergeActualCard HTTP/1.1" 200 None
+[2019-01-23 10:52:18] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:18] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:52:20] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:20] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:52:22] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:22] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:52:24] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:24] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:52:27] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:27] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/phonecard HTTP/1.1" 200 None
+[2019-01-23 10:52:30] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:30] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/sendcode HTTP/1.1" 200 None
+[2019-01-23 10:52:31] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:32] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/account HTTP/1.1" 200 None
+[2019-01-23 10:52:35] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:35] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/account HTTP/1.1" 200 None
+[2019-01-23 10:52:38] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:38] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/cardinfo HTTP/1.1" 200 None
+[2019-01-23 10:52:40] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:40] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/checkcard HTTP/1.1" 200 None
+[2019-01-23 10:52:41] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:41] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/edit HTTP/1.1" 200 None
+[2019-01-23 10:52:43] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:43] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getinfo HTTP/1.1" 200 None
+[2019-01-23 10:52:46] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:46] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/ugetinfo HTTP/1.1" 200 None
+[2019-01-23 10:52:50] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:50] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/uopencard HTTP/1.1" 200 None
+[2019-01-23 10:52:53] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:53] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/listusertags HTTP/1.1" 200 None
+[2019-01-23 10:52:54] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:54] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/listusertags HTTP/1.1" 200 None
+[2019-01-23 10:52:55] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:55] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/listusertags HTTP/1.1" 200 None
+[2019-01-23 10:52:56] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:56] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /tag/touser HTTP/1.1" 200 None
+[2019-01-23 10:52:59] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:52:59] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/list HTTP/1.1" 200 None
+[2019-01-23 10:53:00] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:01] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/user HTTP/1.1" 200 None
+[2019-01-23 10:53:04] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:04] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/all HTTP/1.1" 200 None
+[2019-01-23 10:53:06] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:06] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/list HTTP/1.1" 200 None
+[2019-01-23 10:53:07] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:07] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/user HTTP/1.1" 200 None
+[2019-01-23 10:53:09] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:09] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/view HTTP/1.1" 200 None
+[2019-01-23 10:53:12] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:12] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/overdue HTTP/1.1" 200 None
+[2019-01-23 10:53:15] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:15] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /product/list HTTP/1.1" 200 None
+[2019-01-23 10:53:18] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:18] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /product/list HTTP/1.1" 200 None
+[2019-01-23 10:53:20] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:20] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /product/listbyuser HTTP/1.1" 200 None
+[2019-01-23 10:53:22] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:22] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /cashier/list HTTP/1.1" 200 None
+[2019-01-23 10:53:23] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:23] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /employee/list HTTP/1.1" 200 None
+[2019-01-23 10:53:24] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:24] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /pos/shopcredit HTTP/1.1" 200 None
+[2019-01-23 10:53:27] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:27] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /pos/signin HTTP/1.1" 200 None
+[2019-01-23 10:53:28] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:28] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /shop/list HTTP/1.1" 200 None
+[2019-01-23 10:53:31] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:31] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /grade/rule HTTP/1.1" 200 None
+[2019-01-23 10:53:34] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:34] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:53:37] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:37] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:53:38] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:38] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:53:40] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:40] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/grade HTTP/1.1" 200 None
+[2019-01-23 10:53:41] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:42] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /consume/today HTTP/1.1" 200 None
+[2019-01-23 10:53:44] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:44] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/getpaytype HTTP/1.1" 200 None
+[2019-01-23 10:53:46] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:46] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/getpaytype HTTP/1.1" 200 None
+[2019-01-23 10:53:49] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:49] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /deal/sendnotification HTTP/1.1" 200 None
+[2019-01-23 10:53:50] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:50] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/shoprule HTTP/1.1" 200 None
+[2019-01-23 10:53:53] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:53] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/change HTTP/1.1" 200 None
+[2019-01-23 10:53:57] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:53:58] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/change HTTP/1.1" 200 None
+[2019-01-23 10:54:02] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:03] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/exchange HTTP/1.1" 200 None
+[2019-01-23 10:54:06] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:07] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/exchange HTTP/1.1" 200 None
+[2019-01-23 10:54:08] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:08] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /credit/rule HTTP/1.1" 200 None
+[2019-01-23 10:54:10] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:10] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/adjust HTTP/1.1" 200 None
+[2019-01-23 10:54:13] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:13] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/list HTTP/1.1" 200 None
+[2019-01-23 10:54:14] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:14] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/sendsearch HTTP/1.1" 200 None
+[2019-01-23 10:54:17] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:17] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/detail HTTP/1.1" 200 None
+[2019-01-23 10:54:20] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:20] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/gift HTTP/1.1" 200 None
+[2019-01-23 10:54:24] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:24] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/send HTTP/1.1" 200 None
+[2019-01-23 10:54:27] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:27] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /coupon/send HTTP/1.1" 200 None
+[2019-01-23 10:54:29] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:29] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /user/getusercoupons HTTP/1.1" 200 None
+[2019-01-23 10:54:32] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:33] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/change HTTP/1.1" 200 None
+[2019-01-23 10:54:34] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:34] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/change HTTP/1.1" 200 None
+[2019-01-23 10:54:35] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:35] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/receipt HTTP/1.1" 200 None
+[2019-01-23 10:54:37] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:37] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/receipt HTTP/1.1" 200 None
+[2019-01-23 10:54:40] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:40] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/rule HTTP/1.1" 200 None
+[2019-01-23 10:54:41] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:42] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/view HTTP/1.1" 200 None
+[2019-01-23 10:54:44] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:44] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/today HTTP/1.1" 200 None
+[2019-01-23 10:54:46] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:46] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /pos/chargedetail HTTP/1.1" 200 None
+[2019-01-23 10:54:49] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:49] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /activity/getuserthumbuplog HTTP/1.1" 200 None
+[2019-01-23 10:54:51] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:51] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /activity/otherlist HTTP/1.1" 200 None
+[2019-01-23 10:54:52] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 10:54:52] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /activity/list HTTP/1.1" 200 None
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testChargeAndCancel执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testChargeAndDeal执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testCouponSendAndCancel执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testGradeEditAndDesc执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testCouponCmbSendAndCancel执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testCouponOtherSendAndCancel执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testDealAndRollback执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testCouponSendAndAdjust执行标记:Y
+[2019-01-23 15:12:42] INFO [info: log.py, 20] testChargeAndReceipt执行标记:Y
+[2019-01-23 15:12:44] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 15:12:46] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/preview HTTP/1.1" 200 None
+[2019-01-23 15:12:47] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 15:12:47] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/commit HTTP/1.1" 200 None
+[2019-01-23 15:12:50] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 15:12:51] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/cancel HTTP/1.1" 200 None
+[2019-01-23 15:12:53] DEBUG [_new_conn: connectionpool.py, 824] Starting new HTTPS connection (1): api.acewill.net
+[2019-01-23 15:12:53] DEBUG [_make_request: connectionpool.py, 396] https://api.acewill.net:443 "POST /charge/preview HTTP/1.1" 200 None

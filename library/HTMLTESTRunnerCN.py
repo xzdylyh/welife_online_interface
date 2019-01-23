@@ -86,6 +86,7 @@ import time
 import unittest
 from xml.sax import saxutils
 import sys
+from globalVar import gl
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -620,6 +621,16 @@ class HTMLTestRunner(Template_mixin):
         Return report attributes as a list of (name, value).
         Override this to add custom attributes.
         """
+        #初始化gl字典
+        gl._init()
+        #用例数获取并写入gl字典中
+        sum_case = result.success_count + result.failure_count + result.error_count
+        gl.set_value('sum_case', sum_case)
+        gl.set_value('success_count', result.success_count)
+        gl.set_value('failure_count', result.failure_count)
+        gl.set_value('error_count', result.error_count)
+
+
         startTime = str(self.startTime)[:19]
         duration = str(self.stopTime - self.startTime)
         status = []
@@ -630,6 +641,8 @@ class HTMLTestRunner(Template_mixin):
         if status:
             status = '，'.join(status)
             self.passrate = str("%.2f%%" % (float(result.success_count) / float(result.success_count + result.failure_count + result.error_count) * 100))
+            #通过率写入gl dict对象
+            gl.set_value('passrate', self.passrate)
         else:
             status = 'none'
         return [

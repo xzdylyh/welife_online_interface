@@ -5,7 +5,7 @@ import yaml,json,hashlib
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from collections import OrderedDict
 from urllib import urlencode,quote
-import urllib
+import requests
 from globalVar import gl
 from requests.exceptions import (
     ConnectTimeout,
@@ -373,6 +373,24 @@ def MultipartPartData(**kwargs):
     headers['Content-Type'] = Me.content_type
 
     return Me,headers
+
+
+
+def send_msg_dding(msg):
+    """
+    发送消息到,钉钉群
+    :param msg: 要发送到钉钉的消息文本
+    :return: 响影内容
+    """
+    tk_str = '5a3fb46f772033ce3f7a31e88e518c55f390708712de333dd1abaa06dd3c9f07'
+    url_str = "{}?tk={}&msg={}".format(
+        'https://dd.acewill.net/send.php',
+        tk_str,
+        msg
+    )
+
+    res = requests.get(url=url_str)
+    return res.json()
 
 
 if __name__=="__main__":

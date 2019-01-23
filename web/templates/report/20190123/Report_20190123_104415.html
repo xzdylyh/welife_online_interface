@@ -1,0 +1,2187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>线上-接口自动化测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    //展开或折叠用例按钮显示
+    var hidden_case = document.getElementById("case_hidden_btn");
+    if(level !=0) {
+
+        hidden_case.style.display = "block";
+    }else {
+        hidden_case.style.display = "none";
+    }
+
+    //更改通过时，显示通过按钮，样式，颜色bootstrap按钮
+    var btnpass = $('button[id^="btn_pt"]');
+    for(var i=0;i<btnpass.length;i++){
+        if(btnpass[i].innerText=="通过"){
+            btnpass[i].className="btn btn-success btn-xs";
+        }else{
+            btnpass[i].className="btn btn-danger btn-xs";
+        }
+    }
+
+
+
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+function hidden_case() {
+    var case_btn = document.getElementById("case_hidden_btn");
+    var btn_text = case_btn.innerText;
+
+    var a = $('div[id^="div_pt"]');
+    for(var i=0;i<a.length;i++){
+        if(btn_text=='展开所有'){
+            a[i].className = 'in';
+            a[i].style.height = "auto";
+            case_btn.innerText = "折叠所有";
+        }else {
+            a[i].className = 'collapse';
+            a[i].style.height = "0px";
+            case_btn.innerText = "展开所有";
+        }
+    }
+
+    var b = $('div[id^="div_ft"]');
+    for(var i=0;i<b.length;i++){
+        if(btn_text=='展开所有'){
+            b[i].className = 'in';
+            b[i].style.height = "auto";
+            case_btn.innerText = "折叠所有";
+        }else {
+            b[i].className = 'collapse';
+            b[i].style.height = "0px";
+            case_btn.innerText = "展开所有";
+        }
+    }
+}
+</script>
+<div class='heading'>
+<h4 style="font-family: Microsoft YaHei">线上-接口自动化测试报告</h4>
+<p class='attribute'><strong>测试人员 : </strong> yhleng</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-01-23 10:44:16</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:03:12.416000</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 75，通过 75，通过率= 100.00%</p>
+
+<p class='description'>详细测试用例结果</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 75 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 75 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testScenario.testScenarioCase.TestScenario: 点评微生活－API接口场景</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testDealAndRollback_1: 消费并冲正场景: 交易预览->交易冲正</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt1_1: 用例描述--&gt;消费并冲正场景 消费预览-&gt;冲正-&gt;交易提交(反正用例)
+请求:/deal/preview
+{"sub_balance": 100, "count_num": 2, "credit_amount": 0, "sub_credit": 0, "shop_id": "1905736354", "table_id": "A023", "payment_amount": 0, "biz_id": "20190123104417012", "payment_mode": 1, "cno": "1802326514043775", "consume_amount": 100, "cashier_id": "1180940478"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"consume_credit_amount": 100, "verify_password": true, "grade": null, "credit": "4891", "receive_credit": 1, "balance": 82698, "tcid": 1623417378940096, "coupons": [], "verify_sms": false}, "errcode": 0, "errmsg": "OK"}
+用例描述--&gt;消费并冲正场景 消费预览-&gt;冲正-&gt;交易提交(反正用例)
+请求:/deal/rollback
+{"biz_id": "20190123104417012"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+用例描述--&gt;消费并冲正场景 消费预览-&gt;冲正-&gt;交易提交(反正用例)
+请求:/deal/commit
+{"verify_code": "000000", "biz_id": "20190123104417012"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 3032, "errmsg": "交易状态异常"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testUser.TestUser: 用户模块</td>
+    <td class="text-center">21</td>
+    <td class="text-center">21</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c2',21)" class="detail" id='c2'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserCouponlist_1: 会员全部券接口/user/couponlist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_1: 用例描述--&gt;会员全部券接口
+请求:/user/couponlist
+{"cno": "1114192", "page": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"data": [{"limitations": ["自动化测试专用", "消费满1元可用", "可以和其他种类的券混用"], "coupon_ids": ["1608662191724568642", "1608662094991442170"], "is_all_shop": true, "mix_use": true, "mix_use_value": 0, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "10元代金券", "use_scope": 15, "failure_time": "2018-08-13 23:59:59", "deno": "10", "type": 1, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 1, "effective_time": "2018-08-13 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [], "products": [], "template_id": "8934525"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1608662359358050467"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-06 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-08 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1608398071728381319", "1608397781438651942", "1608395696572319862", "1608398308888519405"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-08 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-10 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1608675683948368829", "1608676202247110138", "1608678308850568745", "1608675213781748150", "1608677692079146685", "1608671989436399525", "1608662364029648422", "1608647401754213445", "1608662492955188831"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-11 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-13 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1608766070106986929", "1608756240683223399", "1608741140935499799", "1608742611964701322"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-12 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-14 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1608847258948397908", "1608835660991009406"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-13 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-15 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1608941858017602511"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-14 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-16 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1609554112214066700"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-21 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-23 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1610206689968581130", "1610184007442656132"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-09-28 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-08-30 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1610669332553158963"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-03 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-04 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1610853342773641237"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-05 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-06 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1611941056015128715", "1611932307671008168", "1611933169744304983"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-17 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-18 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1612029212968763931", "1612022247959732495"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-18 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-19 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1612096112166616801", "1612095279301631174", "1612094115681158706", "1612092228815572842"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-19 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-20 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1612184926486975819", "1612201283977261716", "1612184850548590529", "1612178375918537893"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-20 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-21 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1612661989768978169", "1612659291682263493", "1612659290016043611", "1612658429266532619"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-25 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-26 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1612817563699310976"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-10-27 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-09-28 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1613830182292245285"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-11-07 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-10-09 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1614378339567359664"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-11-13 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-10-15 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"limitations": ["12", "不可以和红茶礼品券同时使用"], "coupon_ids": ["1614464368430681480", "1614447716583505167"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-11-14 23:59:59", "deno": "5", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-10-16 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}], "pageOptions": {"perPage": 20, "showMorePage": false, "to": 19, "start": 0, "totalItems": 59, "currentPage": 1}}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserCreditListI_1: 用户接口:用户积分记录/user/creditlist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_2: 用例描述--&gt;用户积分记录查询
+请求:/user/creditlist
+{"cno": "1114192"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"trade_type": "11", "old_id": null, "tc_id": 1608395692692183, "mid": "0", "credit": "+1", "trade_name": "开卡奖励", "create_time": "2018-08-10 15:21:02", "s_name": "总部门店", "sid": "999999999", "m_name": "-"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserDynamic_1: 用户接口：获取用户动态卡号/user/dynamic</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_3: 用例描述--&gt;获取用户动态卡号
+请求:/user/dynamic
+{"cno": "1112937"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"dynamic_uno": "7160866430961692114721464"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserGetUseCoupon_1: 用户接口：获取已过期优惠券user/getoverduecoupons</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_4: 用例描述--&gt;获取已过期优惠券
+请求:/user/getoverduecoupons
+{"cno": "1114192", "page": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"coupon_ids": ["1620448837813024301"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-19 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-21 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1620347497560569342"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-18 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-20 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1620262010391897976"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-17 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-19 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1620173474963448558"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-16 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-18 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1620080633411339858", "1620089285421327892"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-15 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-17 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1619702540939104509", "1619720104901077947", "1619719362889245850", "1619720190964524802", "1619723689435566798"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-11 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-13 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1619633101675026697"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-10 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-12 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1619550786576541611", "1619536681412570585"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-09 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-11 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1619090277193963661"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-04 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-06 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1618995531633566510"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-03 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-05 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1618798302274850134"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-01 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-03 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1618357952249707563"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-27 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-28 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1618253958718949506", "1618270530134077673"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-26 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-27 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1618186556163860502", "1618178274346507106"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-25 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-26 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1617276229217146373"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-15 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-16 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1617181317695179452", "1617191334534714355"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-14 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-15 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1617098078225566950", "1617089592674882501"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-13 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-14 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1617011057872579513"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-12 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-13 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1616549015820377152"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-07 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-08 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1616275330306909387", "1616279115230193160"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2018-12-04 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-11-05 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserGetc2uInfo_1: 用户接口：根据券获取用户账户信息/user/getc2uinfo</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_5: 用例描述--&gt;根据券获取用户账户信息
+请求:/user/getc2uinfo
+{"c2u_id": "1114192-1608395696572319862"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"name": "huiqingtian", "trade_verify": {"credit_verify": false, "cash_coupon_verify": false, "gift_coupon_verify": false, "charge_verify": true}, "credit": "1", "grade": "3009590", "coupon": {"limitations": ["不可以和红茶礼品券同时使用"], "is_all_shop": false, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "end": "2018-09-08 23:59:59", "use_scope": 15, "create": "2018-08-10 15:21:06", "use_time": "", "start": "2018-08-10 00:00:00", "user_coupon_id": "1608395696572319862", "type": 2, "status": 1, "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "price": "5", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "use_trans_id": "", "give_friend": true, "name": "绿茶礼品券", "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, "sex": "1", "phone": "", "birthday": "1990-06-01", "grade_name": "普通会员", "trade_verify_type": "password", "cno": "1114192", "balance": "100"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserGetoverdueCoupon_1: 用户接口：获取已使用优惠券/user/getusedcoupons</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_6'>通过</button>
+    <div id='div_pt2_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_6' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_6'>通过</button>
+    <div id='div_pt2_6' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_6: 用例描述--&gt;获取已使用优惠券
+请求:/user/getusedcoupons
+{"cno": "1114192", "page": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserMergeActualCard_1: 用户接口：根据券获取用户账户信息/user/mergeActualCard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_7'>通过</button>
+    <div id='div_pt2_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_7' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_7'>通过</button>
+    <div id='div_pt2_7' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_7: 用例描述--&gt;合并微信和实体卡－为实体卡等级
+请求:/user/mergeActualCard
+{"cno": 1112937, "mergegrade": "true", "acno": "1802326181904235"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 22019, "errmsg": "该实体卡已被其他微信卡绑定"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserPhoneCard_1: 手机开卡/user/phonecard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_8'>通过</button>
+    <div id='div_pt2_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_8' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_8'>通过</button>
+    <div id='div_pt2_8' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_8: 用例描述--&gt;手机开卡_参数只输入手机号
+请求:/user/phonecard
+{"phone": "13718651995"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserPhoneCard_2: 手机开卡/user/phonecard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_9'>通过</button>
+    <div id='div_pt2_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_9' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_9'>通过</button>
+    <div id='div_pt2_9' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_9: 用例描述--&gt;手机开卡_参数指定会员等级
+请求:/user/phonecard
+{"grade": 0, "phone": "13718651995"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserPhoneCard_3: 手机开卡/user/phonecard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_10'>通过</button>
+    <div id='div_pt2_10' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_10' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_10'>通过</button>
+    <div id='div_pt2_10' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_10: 用例描述--&gt;手机开卡_参数指定门店
+请求:/user/phonecard
+{"phone": "13718651995", "shop_id": "1905736354"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserPhoneCard_4: 手机开卡/user/phonecard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_11'>通过</button>
+    <div id='div_pt2_11' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_11' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_11'>通过</button>
+    <div id='div_pt2_11' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_11: 用例描述--&gt;手机开卡_参数全部输入
+请求:/user/phonecard
+{"grade": 0, "phone": "13718651995", "is_gift": 0, "shop_id": "1905736354"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserPhoneCard_5: 手机开卡/user/phonecard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_12'>通过</button>
+    <div id='div_pt2_12' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_12' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_12'>通过</button>
+    <div id='div_pt2_12' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_12: 用例描述--&gt;手机开卡_参数指定不赠送开卡礼
+请求:/user/phonecard
+{"phone": "13718651995", "is_gift": 0}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserSendCode_1: 用户接口:给指定用户发送验证码/user/sendcode</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_13'>通过</button>
+    <div id='div_pt2_13' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_13' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_13'>通过</button>
+    <div id='div_pt2_13' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_13: 用例描述--&gt;给指定用户发送验证码
+请求:/user/sendcode
+{"cno": "1802326514043775"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUseraccount_1: 用户接口:获取用户账户信息/user/account</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_14'>通过</button>
+    <div id='div_pt2_14' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_14' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_14'>通过</button>
+    <div id='div_pt2_14' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_14: 用例描述--&gt;获取用户账户信息
+请求:/user/account
+{"cno": "1112937"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"open_source_shop_id": "1905736354", "grade": "3009828", "max_use_saving": "71200", "member_discount": 100, "not_effective_coupons": [], "follow": true, "max_shop_use_saving": null, "acno": "1802326181904235", "open_source": "奥林匹克公园店", "trade_verify": {"credit_verify": false, "cash_coupon_verify": false, "gift_coupon_verify": false, "charge_verify": true}, "use_credit": true, "cno": "1112937", "grade_end_time": "", "type": "wx", "openid": "oskMW1DJ81T0Nl2QMV175ZCM_DW4", "registered": "2018-08-13 14:26:47", "phone": "13718651998", "birthday": "2018-01-01", "trade_verify_type": "password", "coupons": [{"coupon_ids": ["1622696074146519479", "1622714374239262398"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "failure_time": "2019-02-13 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-15 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1622810055601637846"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "failure_time": "2019-02-14 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-16 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1622888581991519256"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "failure_time": "2019-02-15 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-17 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}], "charge_return_credit": true, "unregistered": "0000-00-00 00:00:00", "in_effect": true, "name": "天枢", "member_discount_shops": {"all": 1, "list": []}, "gender": "1", "credit": "53", "grade_name": "vip会员", "group_company": {"limit": "1000000", "in_effect": true, "type": "1", "name": "自动化测试集团消费"}, "unionid": "oyVuGxFuhMEK5jXknlGcSVvLbYWw", "balance": "71200", "qcno": null}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUseraccount_2: 用户接口:获取用户账户信息/user/account</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_15'>通过</button>
+    <div id='div_pt2_15' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_15' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_15'>通过</button>
+    <div id='div_pt2_15' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_15: 用例描述--&gt;获取用户账户信息
+请求:/user/account
+{"cno": "1112937", "shop_id": "1905736354"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"open_source_shop_id": "1905736354", "grade": "3009828", "max_use_saving": "71200", "member_discount": 100, "not_effective_coupons": [], "follow": true, "max_shop_use_saving": 71200, "acno": "1802326181904235", "open_source": "奥林匹克公园店", "trade_verify": {"credit_verify": false, "cash_coupon_verify": false, "gift_coupon_verify": false, "charge_verify": true}, "use_credit": true, "cno": "1112937", "grade_end_time": "", "type": "wx", "openid": "oskMW1DJ81T0Nl2QMV175ZCM_DW4", "registered": "2018-08-13 14:26:47", "phone": "13718651998", "birthday": "2018-01-01", "trade_verify_type": "password", "coupons": [{"coupon_ids": ["1622696074146519479", "1622714374239262398"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "failure_time": "2019-02-13 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-15 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1622810055601637846"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "failure_time": "2019-02-14 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-16 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1622888581991519256"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "failure_time": "2019-02-15 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-17 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}], "charge_return_credit": true, "unregistered": "0000-00-00 00:00:00", "in_effect": true, "name": "天枢", "member_discount_shops": {"all": 1, "list": []}, "gender": "1", "credit": "53", "grade_name": "vip会员", "group_company": {"limit": "1000000", "in_effect": true, "type": "1", "name": "自动化测试集团消费"}, "unionid": "oyVuGxFuhMEK5jXknlGcSVvLbYWw", "balance": "71200", "qcno": null}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsercardinfo_1: 用户接口:查询电子卡接口/user/cardinfo</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_16'>通过</button>
+    <div id='div_pt2_16' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_16' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_16'>通过</button>
+    <div id='div_pt2_16' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_16: 用例描述--&gt;查询电子卡
+请求:/user/cardinfo
+{"openid": "oskMW1DJ81T0Nl2QMV175ZCM_DW4"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"openid": "oskMW1DJ81T0Nl2QMV175ZCM_DW4", "open_source": "奥林匹克公园店", "name": "天枢", "open_source_shop_id": "1905736354", "credit": "53", "grade": "3009828", "unionid": "oyVuGxFuhMEK5jXknlGcSVvLbYWw", "sex": "1", "phone": "13718651998", "birthday": "2018-01-01", "grade_name": "vip会员", "cno": "1112937", "balance": "71200"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsercheckcard_1: 用户接口:验证实体卡信息/user/checkcard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_17'>通过</button>
+    <div id='div_pt2_17' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_17' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_17'>通过</button>
+    <div id='div_pt2_17' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_17: 用例描述--&gt;验证实体卡信息
+请求:/user/checkcard
+{"phone": "13718651998", "acno": "1802326514043775", "mode": "open", "sid": "1905736354"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"is_send_ok": "NOT", "is_send_code": 2, "is_exist_card": 2, "acno": "1802326514043775", "is_exist_phone": 2}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUseredit_1: 用户接口:修改会员信息/user/edit</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_18'>通过</button>
+    <div id='div_pt2_18' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_18' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_18'>通过</button>
+    <div id='div_pt2_18' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_18: 用例描述--&gt;修改会员信息
+请求:/user/edit
+{"username": "huiqingtian", "cno": "1114192", "birth": "1990-06-01", "gender": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsergetinfo_1: 用户接口:获取微信用户账户信息/user/getinfo</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_19'>通过</button>
+    <div id='div_pt2_19' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_19' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_19'>通过</button>
+    <div id='div_pt2_19' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_19: 用例描述--&gt;获取微信用户账户信息
+请求:/user/getinfo
+{"openid": "oskMW1DJ81T0Nl2QMV175ZCM_DW4"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"openid": "oskMW1DJ81T0Nl2QMV175ZCM_DW4", "open_source": "奥林匹克公园店", "name": "天枢", "open_source_shop_id": "1905736354", "credit": "53", "grade": "3009828", "unionid": "oyVuGxFuhMEK5jXknlGcSVvLbYWw", "sex": "1", "phone": "13718651998", "birthday": "2018-01-01", "grade_name": "vip会员", "cno": "1112937", "balance": "71200"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUserugetinfo_1: 用户接口:unionid查询用户/user/ugetinfo</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_20'>通过</button>
+    <div id='div_pt2_20' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_20' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_20'>通过</button>
+    <div id='div_pt2_20' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_20: 用例描述--&gt;unionid查询用户
+请求:/user/ugetinfo
+{"unionid": "20180813152947005"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"openid": "", "open_source": "奥林匹克公园店", "name": "", "open_source_shop_id": "1905736354", "credit": "1", "grade": "3009590", "unionid": "20180813152947005", "sex": 0, "phone": "", "birthday": "", "grade_name": "普通会员", "order_num": 1, "cno": "1113507", "balance": "100"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUseruopencard_1: 用户接口:unionid开卡/user/uopencard</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_21' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_21'>通过</button>
+    <div id='div_pt2_21' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_21' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_21'>通过</button>
+    <div id='div_pt2_21' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_21: 用例描述--&gt;unionid开卡
+请求:/user/uopencard
+{"unionid": "20190123104510005", "shop_id": 1905736354, "phone": "13718651996"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"cno": 1111257, "unionid": "20190123104510005"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testTag.TestTag: 标签模块</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c3',4)" class="detail" id='c3'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testTaglistusertags_1: 用户接口:用户标签列表/tag/listusertags</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt3_1: 用例描述--&gt;用户标签列表- 全部
+请求:/tag/listusertags
+{"category": 0, "cno": "1802326514043775"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"count": 99, "tag_name": "不喜欢羊肉", "tag_category": "1"}, {"count": 99, "tag_name": "喜欢吃辣", "tag_category": "1"}, {"count": 3, "tag_name": "加醋", "tag_category": "1"}, {"count": 1, "tag_name": "more", "tag_category": "1"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testTaglistusertags_2: 用户接口:用户标签列表/tag/listusertags</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt3_2: 用例描述--&gt;用户标签列表- 菜品标签
+请求:/tag/listusertags
+{"category": 4, "cno": "1802326514043775"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testTaglistusertags_3: 用户接口:用户标签列表/tag/listusertags</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt3_3: 用例描述--&gt;用户标签列表- POS消费
+请求:/tag/listusertags
+{"category": 1, "cno": "1802326514043775"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"count": 99, "tag_name": "不喜欢羊肉", "tag_category": "1"}, {"count": 99, "tag_name": "喜欢吃辣", "tag_category": "1"}, {"count": 3, "tag_name": "加醋", "tag_category": "1"}, {"count": 1, "tag_name": "more", "tag_category": "1"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testTagtouser_1: 用户接口:用户增加标签/tag/touser</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt3_4: 用例描述--&gt;为用户增加多个标签
+请求:/tag/touser
+{"cno": "1802326514043775", "tags": ["不喜欢羊肉", "喜欢吃辣"]}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "ok"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testSearch.TestSearch: 查询模块</td>
+    <td class="text-center">7</td>
+    <td class="text-center">7</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c4',7)" class="detail" id='c4'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargelist_1: 查询接口:储值记录列表/charge/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_1'>通过</button>
+    <div id='div_pt4_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt4_1: 用例描述--&gt;储值记录列表
+请求:/charge/list
+{"is_allday": 1, "begin_date": "2017-03-10", "end_date": "2017-03-10", "sid2": 1905736354, "is_all": "True", "cashier_id2": "1131294517", "page": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"data": [], "pageOptions": {"currentPage": 1, "perPage": 50, "to": 49, "start": 0}}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargeuser_1: 查询接口:指定会员储值记录列表/charge/user</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_2'>通过</button>
+    <div id='div_pt4_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt4_2: 用例描述--&gt;指定会员储值记录列表
+请求:/charge/user
+{"cno": "1802326514043775", "shop_id": 1905736354, "begin_date": "2018-08-09", "page": 1, "end_date": "2018-08-10"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"data": [{"pay_type": "6", "remark": "test", "fee": "100", "pay_time": "2018-08-10 17:46:09", "grade": "3009828", "biz_id": "", "cashier_id": "1149171787", "charge_id": "1608404822044045", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "200", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "0", "type": "1", "award_fee": "100"}, {"pay_type": "6", "remark": "test", "fee": "100", "pay_time": "2018-08-10 17:45:15", "grade": "3009828", "biz_id": "", "cashier_id": "1149171787", "charge_id": "1608404765379017", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "200", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "0", "type": "1", "award_fee": "100"}, {"pay_type": "1", "remark": "", "fee": "7300", "pay_time": "2018-08-10 17:43:19", "grade": "3009828", "biz_id": "", "cashier_id": "1180940478", "charge_id": "1608404644143214", "award_coupons": [{"amount": "5", "number": "1", "name": "绿茶礼品券", "coupon_id": "8912529"}], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "8249", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "2", "type": "1", "award_fee": "949"}, {"pay_type": "6", "remark": "test", "fee": "100", "pay_time": "2018-08-10 17:42:46", "grade": "3009828", "biz_id": "", "cashier_id": "1149171787", "charge_id": "1608404609422331", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "200", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "0", "type": "1", "award_fee": "100"}, {"pay_type": "1", "remark": "", "fee": "500000", "pay_time": "2018-08-10 17:41:35", "grade": "3009828", "biz_id": "", "cashier_id": "1180940478", "charge_id": "1608404535251075", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "505000", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "2", "type": "1", "award_fee": "5000"}, {"pay_type": "6", "remark": "test", "fee": "100", "pay_time": "2018-08-10 17:40:06", "grade": "3009828", "biz_id": "", "cashier_id": "1149171787", "charge_id": "1608404442052692", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "200", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "0", "type": "1", "award_fee": "100"}, {"pay_type": "6", "remark": "test", "fee": "100", "pay_time": "2018-08-10 15:02:29", "grade": "3009828", "biz_id": "", "cashier_id": "1149171787", "charge_id": "1608394525552462", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "200", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "0", "type": "1", "award_fee": "100"}, {"pay_type": "6", "remark": "test", "fee": "100", "pay_time": "2018-08-10 15:00:50", "grade": "3009828", "biz_id": "", "cashier_id": "1149171787", "charge_id": "1608394421352874", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "200", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "0", "type": "1", "award_fee": "100"}, {"pay_type": "6", "remark": "test", "fee": "100", "pay_time": "2018-08-10 14:51:47", "grade": "3009828", "biz_id": "", "cashier_id": "1149171787", "charge_id": "1608393852579163", "award_coupons": [], "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "200", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "0", "type": "1", "award_fee": "100"}, {"pay_type": "1", "remark": "", "fee": "500000", "pay_time": "2018-08-09 11:26:59", "grade": "3009590", "biz_id": "", "cashier_id": "1180940478", "charge_id": "1608290369871325", "award_coupons": [], "grade_name": "普通会员", "mixed_pay_info": null, "total_fee": "505000", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "2", "type": "1", "award_fee": "5000"}, {"pay_type": "1", "remark": "", "fee": "7300", "pay_time": "2018-08-09 11:25:34", "grade": "3009590", "biz_id": "", "cashier_id": "1180940478", "charge_id": "1608290281145563", "award_coupons": [{"amount": "5", "number": "1", "name": "绿茶礼品券", "coupon_id": "8912529"}], "grade_name": "普通会员", "mixed_pay_info": null, "total_fee": "8249", "sid": "1905736354", "cno": "1802326514043775", "has_receipt": "2", "type": "1", "award_fee": "949"}], "pageOptions": {"currentPage": 1, "perPage": 50, "to": 49, "start": 0}}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testConsumeall_1: 查询接口:/consume/all</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_3'>通过</button>
+    <div id='div_pt4_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt4_3: 用例描述--&gt;查询接口/consume/all
+请求:/consume/all
+{"shop_id": 1905736354, "begin_date": "2018-1-17 00:00:00", "page": 1, "end_date": "2018-1-17 19:19:00"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"data": [], "pageOptions": {"totalItems": 0, "currentPage": 1, "perPage": 200, "to": 199, "start": 0}}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testConsumelist_1: 查询接口:消费记录列表/consume/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_4'>通过</button>
+    <div id='div_pt4_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt4_4: 用例描述--&gt;消费记录列表
+请求:/consume/list
+{"is_have_page": "true", "is_allday": 1, "begin_date": "2017-11-29", "shop_id2": 1905736354, "end_date": "2017-12-01", "is_all": "true", "page": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testConsumeuser_1: 查询接口:用户消费记录/consume/user</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_5'>通过</button>
+    <div id='div_pt4_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_5'>通过</button>
+    <div id='div_pt4_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt4_5: 用例描述--&gt;用户消费记录
+请求:/consume/user
+{"end_date": "2018-08-10", "cno": "1802326514043775", "begin_date": "2018-08-09", "page": 1, "shop_id2": 1905736354}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"data": [{"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608404823543030", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "test", "pay_time": "2018-08-10 17:46:10", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608404766897866", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "test", "pay_time": "2018-08-10 17:45:16", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608404610907222", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "test", "pay_time": "2018-08-10 17:42:47", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608404444692787", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "test", "pay_time": "2018-08-10 17:40:09", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608403005275753", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "", "pay_time": "2018-08-10 17:17:16", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "1", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "2"}, {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608394529310042", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "test", "pay_time": "2018-08-10 15:02:33", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608394424032473", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "test", "pay_time": "2018-08-10 15:00:52", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608393856243215", "user_coupon_name": "", "stored_sale_pay": "100", "biz_id": "", "remark": "test", "pay_time": "2018-08-10 14:51:51", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, {"stored_pay": "500000", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608302217801921", "user_coupon_name": "", "stored_sale_pay": "493951", "biz_id": "", "remark": "", "pay_time": "2018-08-09 14:35:18", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "5000", "total_fee": "500000", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "2"}, {"stored_pay": "500000", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608302195283258", "user_coupon_name": "", "stored_sale_pay": "493951", "biz_id": "", "remark": "", "pay_time": "2018-08-09 14:34:56", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "500000", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "3"}, {"stored_pay": "500000", "pay_type": "1", "credit_pay": "0", "fee": "0", "user_coupon_list": [], "deal_id": "1608301585409411", "user_coupon_name": "", "stored_sale_pay": "493951", "biz_id": "", "remark": "", "pay_time": "2018-08-09 14:25:15", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "credit_award": "0", "total_fee": "500000", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "4"}], "pageOptions": {"perPage": 50, "showMorePage": false, "to": 49, "start": 0, "totalItems": 11, "currentPage": 1}}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testConsumeview_1: 查询接口:消费记录详情/consume/view</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_6'>通过</button>
+    <div id='div_pt4_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_6' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_6'>通过</button>
+    <div id='div_pt4_6' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt4_6: 用例描述--&gt;消费记录详情
+请求:/consume/view
+{"deal_id": "1608404823543030"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"stored_pay": "100", "pay_type": "1", "credit_pay": "0", "fee": "0", "deal_id": "1608404823543030", "stored_sale_pay": "100", "biz_id": "", "cashier_id": "1149171787", "remark": "test", "pay_time": "2018-08-10 17:46:10", "cash_coupon_pay": "0", "gift_coupon_pay": "0", "status": "2", "credit_award": "0", "total_fee": "100", "sid": "1905736354", "credit_num": "0", "cno": "1802326514043775", "type": "8"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCouponoverdue_1: 查询接口:/coupon/overdue</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_7'>通过</button>
+    <div id='div_pt4_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_7' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_7'>通过</button>
+    <div id='div_pt4_7' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt4_7: 用例描述--&gt;查询接口:/coupon/overdue
+请求:/coupon/overdue
+{"cno": "1802326514043775", "template_id2": 8927448}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"data": [{"pack_id": 0, "activity_id": "3063019", "end": "2018-09-08 23:59:59", "name": "绿茶礼品券", "price": "5", "start": "2018-08-10 00:00:00", "num": 1, "user_coupon_id": "1608404645531000646", "cno": "", "type": "礼品券", "template_id": "8912529"}, {"pack_id": 0, "activity_id": "3063019", "end": "2018-09-07 23:59:59", "name": "绿茶礼品券", "price": "5", "start": "2018-08-09 00:00:00", "num": 1, "user_coupon_id": "1608290285762661792", "cno": "", "type": "礼品券", "template_id": "8912529"}], "pageOptions": {"perPage": 50, "showMorePage": false, "to": 49, "start": 0, "totalItems": 2, "currentPage": 1}}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testProduct.TestProduct: Product模块</td>
+    <td class="text-center">3</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c5',3)" class="detail" id='c5'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt5_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testProductlist_1: 菜品接口:商家点菜记录列表/product/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_1'>通过</button>
+    <div id='div_pt5_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_1'>通过</button>
+    <div id='div_pt5_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt5_1: 用例描述--&gt;按日期门店精确查询菜品列表
+请求:/product/list
+{"start": "2018-02-05", "sids": 1905736354, "end": "2018-08-10"}
+Appid:dp0lAFoLhPE9sr0inINQaPKo
+响应:
+{"res": null, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testProductlist_2: 菜品接口:商家点菜记录列表/product/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_2'>通过</button>
+    <div id='div_pt5_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_2'>通过</button>
+    <div id='div_pt5_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt5_2: 用例描述--&gt;按日期查询菜品列表
+请求:/product/list
+{"start": "2018-02-05", "end": "2018-08-10"}
+Appid:dp0lAFoLhPE9sr0inINQaPKo
+响应:
+{"res": null, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testProductlistbyuser_1: 菜品接口:查询会员点菜记录/product/listbyuser</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_3'>通过</button>
+    <div id='div_pt5_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_3'>通过</button>
+    <div id='div_pt5_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt5_3: 用例描述--&gt;查询会员点菜记录
+请求:/product/listbyuser
+{"cno": "1802326514043775", "end": "2018-08-10", "start": "2018-02-05"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testManage.TestManage: 商户管理模块</td>
+    <td class="text-center">5</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c6',5)" class="detail" id='c6'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt6_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCashierlist_1: 商家接口:获取收银员列表/cashier/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_1'>通过</button>
+    <div id='div_pt6_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_1'>通过</button>
+    <div id='div_pt6_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt6_1: 用例描述--&gt;获取收银员列表-0页
+请求:/cashier/list
+{"shop_id": 1905736354, "page": 0}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"username": "天枢", "shop_id": "1905736354", "nickname": "天枢", "cashier_id": "1125497197"}, {"username": "测试草莓", "shop_id": "1905736354", "nickname": "测试草莓", "cashier_id": "1110948608"}, {"username": "接口自动化测试", "shop_id": "1905736354", "nickname": "接口自动化测试", "cashier_id": "1180940478"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testEmployee_1: 商家接口:查询员工/employee/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_2'>通过</button>
+    <div id='div_pt6_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_2'>通过</button>
+    <div id='div_pt6_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt6_2: 用例描述--&gt;查询员工
+请求:/employee/list
+{"shop_id": 1905736354}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"employee_phone": "13718651997", "employee_id": "", "employee_name": "天枢"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testPosshopcredit_1: 硬pos获取用户的积分规则/pos/shopcredit</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_3'>通过</button>
+    <div id='div_pt6_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_3'>通过</button>
+    <div id='div_pt6_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt6_3: 用例描述--&gt;获取用户的积分规则
+请求:/pos/shopcredit
+{"shop_id": 3291166425, "uid": "71608222238572709"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 10009, "errmsg": "尚未登录"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testPossignin_1: 商家接口:收银员账号登陆签到/pos/signin</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_4'>通过</button>
+    <div id='div_pt6_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_4'>通过</button>
+    <div id='div_pt6_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt6_4: 用例描述--&gt;收银员账号登陆签到
+请求:/pos/signin
+{"username": 13800138953, "password": 123456, "shop_id": 3291166425}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"shop_id": "3291166425", "cashier_id": "1146073508", "brand_name": "天空之城", "shop_name": "南锣鼓巷店"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testShoplist_1: 商家接口:获取门店列表/shop/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_5'>通过</button>
+    <div id='div_pt6_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_5'>通过</button>
+    <div id='div_pt6_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt6_5: 用例描述--&gt;获取门店列表
+请求:/shop/list
+{}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"shop_longitude": "116.42093", "shop_address": "东四十条110号", "service_start": "2018-04-11", "shop_latitude": "39.93373", "shop_name": "东四十条店", "shop_id": "1866053542", "service_end": "2019-04-11"}, {"shop_longitude": "116.392081", "shop_address": "奥林匹克公园地铁站", "service_start": "2018-04-11", "shop_latitude": "40.002184", "shop_name": "奥林匹克公园店", "shop_id": "1905736354", "service_end": "2019-04-11"}, {"shop_longitude": "116.40701912701414", "shop_address": "南锣鼓巷", "service_start": "2018-03-28", "shop_latitude": "39.93627430054968", "shop_name": "南锣鼓巷店", "shop_id": "3291166425", "service_end": "2019-03-28"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testGrade.TestGrade: 等级模块</td>
+    <td class="text-center">5</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c7',5)" class="detail" id='c7'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt7_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testGraderule_1: 等级接口:查看等级设置/grade/rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_1'>通过</button>
+    <div id='div_pt7_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_1'>通过</button>
+    <div id='div_pt7_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt7_1: 用例描述--&gt;查看等级设置
+请求:/grade/rule
+{}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"grades": [{"member_discount": 100, "name": "普通会员", "title": "普通会员", "privileges": null, "regulars": null, "summaries": "", "order": "1", "num": 0, "mode": "", "credit_price": "1000", "charge_flag": "1", "credit_flag": "1", "id": "3009590"}, {"member_discount": 100, "name": "黑卡会员", "title": "黑卡会员", "privileges": null, "regulars": {"1": 6000}, "summaries": "", "order": "4", "num": 0, "mode": "", "credit_price": "100", "charge_flag": "1", "credit_flag": "1", "id": "3012534"}, {"member_discount": 100, "name": "金卡会员", "title": "金卡会员", "privileges": ["金卡新菜享八折"], "regulars": {"1": 8000}, "summaries": "", "order": "3", "num": 0, "mode": "", "credit_price": "300", "charge_flag": "1", "credit_flag": "1", "id": "3012533"}, {"member_discount": 100, "name": "vip会员", "title": "vip会员", "privileges": ["啦啦啦"], "regulars": {"5": 20000}, "summaries": "", "order": "2", "num": 0, "mode": "", "credit_price": "100", "charge_flag": "1", "credit_flag": "1", "id": "3009828"}]}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsergrade_1: 等级接口:查询会员等级信息/user/grade</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_2'>通过</button>
+    <div id='div_pt7_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_2'>通过</button>
+    <div id='div_pt7_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt7_2: 用例描述--&gt;根据电子卡，查询会员等级信息
+请求:/user/grade
+{"cno": "1114192"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"name": "普通会员", "old_id": 0, "limit_time": 0, "charge_flag": "1", "member_discount": "100", "charge": 0, "id": "3009590", "credit_flag": "1", "privileges": []}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsergrade_2: 等级接口:查询会员等级信息/user/grade</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_3'>通过</button>
+    <div id='div_pt7_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_3'>通过</button>
+    <div id='div_pt7_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt7_3: 用例描述--&gt;根据手机号，查询会员等级信息
+请求:/user/grade
+{"cno": "13718651998"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"name": "vip会员", "old_id": "3009590", "limit_time": 0, "charge_flag": "1", "member_discount": "100", "charge": 0, "id": "3009828", "credit_flag": "1", "privileges": ["啦啦啦"]}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsergrade_3: 等级接口:查询会员等级信息/user/grade</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_4'>通过</button>
+    <div id='div_pt7_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_4'>通过</button>
+    <div id='div_pt7_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt7_4: 用例描述--&gt;根据会员卡，查询会员等级信息
+请求:/user/grade
+{"cno": "1802326514043775"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"name": "vip会员", "old_id": "3009590", "limit_time": 0, "charge_flag": "1", "member_discount": "100", "charge": 0, "id": "3009828", "credit_flag": "1", "privileges": ["啦啦啦"]}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsergrade_4: 等级接口:查询会员等级信息/user/grade</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_5'>通过</button>
+    <div id='div_pt7_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_5'>通过</button>
+    <div id='div_pt7_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt7_5: 用例描述--&gt;根据实体卡磁道号，查询会员等级信息
+请求:/user/grade
+{"cno": "541802326514043775023265140437"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"name": "vip会员", "old_id": "3009590", "limit_time": 0, "charge_flag": "1", "member_discount": "100", "charge": 0, "id": "3009828", "credit_flag": "1", "privileges": ["啦啦啦"]}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testDeal.TestDeal: 消费模块</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c8',4)" class="detail" id='c8'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt8_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testDealconsumetoday_1: 交易模块:当日交易计录统计/consume/today</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_1'>通过</button>
+    <div id='div_pt8_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_1'>通过</button>
+    <div id='div_pt8_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt8_1: 用例描述--&gt;当日交易计录统计/consume/today
+请求:/consume/today
+{"end_time": "15:00", "begin_time": "10:00"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"shop": null, "payType": null}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testDealgetpaytype_1: 交易模块:获取交易/储值支付方式/deal/getpaytype</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_2'>通过</button>
+    <div id='div_pt8_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_2'>通过</button>
+    <div id='div_pt8_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt8_2: 用例描述--&gt;当获取交易/储值支付方式 - 交易
+请求:/deal/getpaytype
+{"optype": "consume"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"11": "支票", "10": "其他", "12": "集团消费", "1": "现金支付", "3": "店内微信支付", "2": "银行卡支付", "4": "支付宝支付", "7": "百度糯米", "6": "线上微信支付", "9": "大众点评", "8": "美团"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testDealgetpaytype_2: 交易模块:获取交易/储值支付方式/deal/getpaytype</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_3'>通过</button>
+    <div id='div_pt8_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_3'>通过</button>
+    <div id='div_pt8_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt8_3: 用例描述--&gt;当获取交易/储值支付方式 - 储值
+请求:/deal/getpaytype
+{"optype": "charge"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"11": "百度糯米", "13": "大众点评", "12": "美团", "14": "其他", "1": "现金支付", "3": "线上微信支付", "2": "银行卡支付", "5": "店内微信支付", "4": "支付宝支付"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testDealsendnotification_1: 交易模块/deal/sendnotification</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_4'>通过</button>
+    <div id='div_pt8_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_4'>通过</button>
+    <div id='div_pt8_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt8_4: 用例描述--&gt;/deal/sendnotification
+请求:/deal/sendnotification
+{"biz_id": "20180814153201009"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testCredit.TestCredit: 积分模块</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c9',6)" class="detail" id='c9'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt9_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCreaditshoprule_1: 积分规则新接口/credit/shoprule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_1'>通过</button>
+    <div id='div_pt9_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_1'>通过</button>
+    <div id='div_pt9_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt9_1: 用例描述--&gt;积分规则新接口
+请求:/credit/shoprule
+{"shopid": "1905736354"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"rang": null, "expired": "0000-00-00", "consume": {"credit_gift_openflag": 1, "credit_gift_desc": "&lt;p&gt;自动化测试大礼包&lt;/p&gt;", "credit_gift_rule": [{"credit": 1, "gift": "自动化大礼", "giftName": ""}], "credit_consume_openflag": 1}, "gift": [{"credit": 1, "price": 1, "ruleType": 1, "ccids": ["3012534", "3009828"], "scale": 0}, {"credit": 1, "price": 3, "ruleType": 1, "ccids": ["3012533"], "scale": 0}, {"credit": 1, "price": 10, "ruleType": 1, "ccids": ["3009590"], "scale": 0}], "description": ""}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCreditchange_1: 积分接口:手工调整积分/credit/change</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_2'>通过</button>
+    <div id='div_pt9_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_2'>通过</button>
+    <div id='div_pt9_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt9_2: 用例描述--&gt;增加积分
+请求:/credit/change
+{"credit": 1, "remark": "heihei", "shop_id": "1905736354", "biz_id": "20190123104618001", "cno": "1802326514043775", "cashier_id": "1180940478", "type": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCreditchange_2: 积分接口:手工调整积分/credit/change</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_3'>通过</button>
+    <div id='div_pt9_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_3'>通过</button>
+    <div id='div_pt9_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt9_3: 用例描述--&gt;减少积分
+请求:/credit/change
+{"remark": "heihei", "cashier_id": "1180940478", "notice": "-1", "credit": 1, "shop_id": "1905736354", "biz_id": "20190123104623001", "cno": "1802326514043775", "type": 2}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCreditexchange_1: 积分接口:积分换礼/credit/exchange</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_4'>通过</button>
+    <div id='div_pt9_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_4'>通过</button>
+    <div id='div_pt9_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt9_4: 用例描述--&gt;积分换礼-非默认收银员
+请求:/credit/exchange
+{"shop_id": "1905736354", "cashier_id": "1180940478", "sub_credit": 1, "cno": "1802326514043775", "biz_id": "20190123104627004", "desc": "30分换礼品"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"tcid": "41623417515690201", "result": "SUCCESS", "time": "2019-01-23 10:46:29"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCreditexchange_2: 积分接口:积分换礼/credit/exchange</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_5'>通过</button>
+    <div id='div_pt9_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_5'>通过</button>
+    <div id='div_pt9_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt9_5: 用例描述--&gt;积分换礼-默认收银员
+请求:/credit/exchange
+{"shop_id": "1905736354", "cashier_id": -1, "sub_credit": 1, "cno": "1802326514043775", "biz_id": "20190123104631004", "desc": "30分换礼品"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"tcid": "41623417519592144", "result": "SUCCESS", "time": "2019-01-23 10:46:33"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCreditrule_1: 积分接口:查看积分设置/credit/rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_6'>通过</button>
+    <div id='div_pt9_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_6' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_6'>通过</button>
+    <div id='div_pt9_6' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt9_6: 用例描述--&gt;查看积分设置
+请求:/credit/rule
+{}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"expired": "0000-00-00", "consume": {"credit_gift_openflag": 1, "credit_gift_desc": "&lt;p&gt;自动化测试大礼包&lt;/p&gt;", "credit_gift_rule": [{"credit": 1, "gift": "自动化大礼", "giftName": ""}], "credit_consume_openflag": 1}, "gift": {"credit": 1, "price": 1, "gift_range": 2}, "description": ""}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testCoupon.TestCoupon: 券模块</td>
+    <td class="text-center">8</td>
+    <td class="text-center">8</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c10',8)" class="detail" id='c10'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt10_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCouponC2uinfo_1: 券接口:手工调整核销券/coupon/adjust</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_1'>通过</button>
+    <div id='div_pt10_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_1'>通过</button>
+    <div id='div_pt10_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_1: 用例描述--&gt;手工调帐核销券-带券包不可调帐(反向用例)
+请求:/coupon/adjust
+{"cno": "1586313021715287", "remark": "手工调帐带券包", "shop_id": "1905736354", "coupon_ids": ["1622600015456493729"], "cashier_id": "1131294517"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 3119, "errmsg": "券包不能调账"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCouponList_1: 券接口:券列表/coupon/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_2'>通过</button>
+    <div id='div_pt10_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_2'>通过</button>
+    <div id='div_pt10_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_2: 用例描述--&gt;券列表
+请求:/coupon/list
+{"page": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "10元代金券", "creator": "天空之城管理员", "enable_amount": 0, "created": "2018-10-15", "shop_list": "1866053542,1905736354,3291166425", "summary": "", "max_use": 0, "products": [], "use_scope": 1, "deno": 1000, "limit_mix_coupon": [], "type": 1, "template_id": "8946466", "valid_data": "relative,1,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "01006", "creator": "天空之城管理员", "enable_amount": 0, "created": "2018-10-15", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;435345&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": ["01006"], "use_scope": 15, "deno": 0, "limit_mix_coupon": [], "type": 2, "template_id": "8946462", "valid_data": "relative,1,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "80138", "creator": "天空之城管理员", "enable_amount": 0, "created": "2018-10-12", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;333&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": ["80138"], "use_scope": 15, "deno": 0, "limit_mix_coupon": [], "type": 2, "template_id": "8946039", "valid_data": "relative,1,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "801290000", "creator": "天空之城管理员", "enable_amount": 0, "created": "2018-09-29", "shop_list": "3291166425", "summary": "", "max_use": 0, "products": ["80129"], "use_scope": 15, "deno": 500, "limit_mix_coupon": [], "type": 2, "template_id": "8943952", "valid_data": "relative,1,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "80129", "creator": "天空之城管理员", "enable_amount": 0, "created": "2018-09-29", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;2&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": ["80129"], "use_scope": 15, "deno": 0, "limit_mix_coupon": [], "type": 2, "template_id": "8943940", "valid_data": "relative,2,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "02066", "creator": "天空之城管理员", "enable_amount": 0, "created": "2018-09-26", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;333&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": ["02066"], "use_scope": 15, "deno": 0, "limit_mix_coupon": [], "type": 2, "template_id": "8943026", "valid_data": "relative,8,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "10元代金券", "creator": "天空之城管理员", "enable_amount": 0, "created": "2018-09-26", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;22&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": [], "use_scope": 1, "deno": 1000, "limit_mix_coupon": [], "type": 1, "template_id": "8943024", "valid_data": "relative,9,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "10元代金券", "creator": "天空之城管理员", "enable_amount": "100", "created": "2018-08-13", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;自动化测试专用&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": [], "use_scope": "15", "deno": 1000, "limit_mix_coupon": [], "type": "1", "template_id": "8934525", "valid_data": "relative,1,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "5元自动化测试代金券", "creator": "天空之城管理员", "enable_amount": "100", "created": "2018-08-10", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;自动化测试专用&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": [], "use_scope": "15", "deno": 500, "limit_mix_coupon": [], "type": "1", "template_id": "8934220", "valid_data": "relative,999,1"}, {"mix_use": "0", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "20元代金券", "creator": "天空之城管理员", "enable_amount": "0", "created": "2018-06-29", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;11&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": [], "use_scope": "1", "deno": 2000, "limit_mix_coupon": [], "type": "1", "template_id": "8927448", "valid_data": "relative,18,1"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCouponSendSearch_1: 券接口:根据biz_id查询发券详情/coupon/sendsearch</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_3'>通过</button>
+    <div id='div_pt10_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_3'>通过</button>
+    <div id='div_pt10_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_3: 用例描述--&gt;根据biz_id查询发券详情
+请求:/coupon/sendsearch
+{"biz_id": "20180810155414006"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"cno": "1114192", "data": [{"status": 1, "end": "2018-09-08 23:59:59", "name": "绿茶礼品券", "price": "5", "use_time": "", "start": "2018-08-10 00:00:00", "user_coupon_id": "1608397781438651942", "create": "2018-08-10 15:54:14", "type": "礼品券", "template_id": "8912529", "use_trans_id": ""}]}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCoupondetail_1: 券接口:券模板详情/coupon/detail</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_4'>通过</button>
+    <div id='div_pt10_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_4'>通过</button>
+    <div id='div_pt10_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_4: 用例描述--&gt;券模板详情
+请求:/coupon/detail
+{"coupon_id": 8912527}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"mix_use": "2", "give_friend": true, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "products_ext": "", "name": "红茶礼品券", "creator": "天空之城管理员", "enable_amount": "0", "created": "2018-04-11", "shop_list": "ALL", "summary": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;12334&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;", "max_use": 0, "products": [], "use_scope": "15", "deno": 500, "limit_mix_coupon": [{"couponId": "8912529", "name": "绿茶礼品礼品券"}], "type": "2", "template_id": "8912527", "valid_data": "relative,60,1"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCoupongift_1: 券转赠接口/coupon/gift断言30013,该券已转赠过不能重复提交</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_5'>通过</button>
+    <div id='div_pt10_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_5'>通过</button>
+    <div id='div_pt10_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_5: 用例描述--&gt;券转赠接口
+请求:/coupon/gift
+{"get_cno": "1114192", "cno": "1802326514043775", "coupon_ids": ["1608222239398142815"], "shop_id": "1905736354"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 30013, "errmsg": "该券已转增过不能重复提交"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCouponsend_1: 券接口:发券/coupon/send</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_6'>通过</button>
+    <div id='div_pt10_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_6' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_6'>通过</button>
+    <div id='div_pt10_6' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_6: 用例描述--&gt;发券
+请求:/coupon/send
+{"cno": "1114192", "amount": 1, "shop_id": "1905736354", "template_id": 8912529, "biz_id": "20190123104651006"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"biz_id": "20190123104651006"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testCouponsend_2: 券接口:发券/coupon/send</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_7'>通过</button>
+    <div id='div_pt10_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_7' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_7'>通过</button>
+    <div id='div_pt10_7' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_7: 用例描述--&gt;发券-券包使用的模版
+请求:/coupon/send
+{"cno": "1586313587095560", "amount": 1, "shop_id": "1905736354", "template_id": 8927448, "biz_id": "20190123104655006"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"biz_id": "20190123104655006"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt10_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testUsergetusercoupons_1: 根据卡号查询券列表/user/getusercoupons</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt10_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt10_8'>通过</button>
+    <div id='div_pt10_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt10_8' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt10_8'>通过</button>
+    <div id='div_pt10_8' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt10_8: 用例描述--&gt;根据卡号查询券列表
+请求:/user/getusercoupons
+{"cno": "1586313021715287"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"coupon_ids": ["1620900609791622379"], "is_all_shop": true, "mix_use": false, "mix_use_value": 2, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "绿茶礼品券", "use_scope": 15, "failure_time": "2019-01-24 23:59:59", "deno": "5", "type": 2, "limitations": ["12", "不可以和红茶礼品券同时使用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-26 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [8912527], "products": [], "template_id": "8912529"}, {"coupon_ids": ["1620900609836641214"], "is_all_shop": true, "mix_use": true, "mix_use_value": 0, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "425魔方", "use_scope": 15, "failure_time": "2019-01-26 23:59:59", "deno": "5", "type": 2, "limitations": ["111", "可以和其他种类的券混用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2018-12-26 00:00:00", "max_use": 0, "coupon_pack": null, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [], "products": [], "template_id": "8915215"}, {"coupon_ids": ["1622600015497819488", "1622600015505211351", "1622600015490425160", "1622600015512601565", "1622600015527443525", "1622600015549686256", "1622600015542090425", "1622600015534731442", "1622600015482972924", "1622600015519867240"], "is_all_shop": true, "mix_use": true, "mix_use_value": 0, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "20元代金券", "use_scope": 1, "failure_time": "2019-01-31 23:59:59", "deno": "20", "type": 1, "limitations": ["11", "可以和其他种类的券混用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-14 00:00:00", "max_use": 0, "coupon_pack": {"coupon_pack_id": "8942770", "coupon_pack_name": "20元券包"}, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [], "products": [], "template_id": 8927448}, {"coupon_ids": ["1622600015456493729", "1622600015411829232", "1622600015404551350", "1622600015395833629", "1622600015419143949", "1622600015426414577", "1622600015448936217", "1622600015441254673", "1622600015433778424", "1622600015463795877"], "is_all_shop": true, "mix_use": true, "mix_use_value": 0, "is_diy_deno": false, "use_week_day": ["1", "2", "3", "4", "5", "6", "0"], "title": "20元代金券", "use_scope": 1, "failure_time": "2019-01-31 23:59:59", "deno": "20", "type": 1, "limitations": ["11", "可以和其他种类的券混用"], "products_ext": "", "shop_ids": {"1905736354": "奥林匹克公园店", "1866053542": "东四十条店", "3291166425": "南锣鼓巷店"}, "enable_amount": 0, "effective_time": "2019-01-14 00:00:00", "max_use": 0, "coupon_pack": {"coupon_pack_id": "8942770", "coupon_pack_name": "20元券包"}, "valid_use_times": [], "give_friend": true, "sids": [1866053542, 1905736354, 3291166425], "limit_type": 0, "limit_mix_coupon": [], "products": [], "template_id": 8927448}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testCharge.储值模块: 点评微生活－API单接口</td>
+    <td class="text-center">8</td>
+    <td class="text-center">8</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c11',8)" class="detail" id='c11'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt11_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargeChange_1: 储值模块:储值调整/charge/change</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_1'>通过</button>
+    <div id='div_pt11_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_1'>通过</button>
+    <div id='div_pt11_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_1: 用例描述--&gt;储值增加1,送1
+请求:/charge/change
+{"remark": "test", "shop_id": 1905736354, "change_type": 1, "cno": "1802326514043775", "cashier_id": "1131294517", "money": 100, "award_money": 100}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"deal_id": 1623417549783793}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargeChange_2: 储值模块:储值调整/charge/change</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_2'>通过</button>
+    <div id='div_pt11_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_2'>通过</button>
+    <div id='div_pt11_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_2: 用例描述--&gt;储值减少1
+请求:/charge/change
+{"remark": "test", "shop_id": 1905736354, "change_type": 2, "cno": "1802326514043775", "cashier_id": "1131294517", "money": 100, "award_money": 100}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"deal_id": 1623417553697560}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargeReceipt_1: 储值模块:储值是否开发票/charge/receipt</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_3'>通过</button>
+    <div id='div_pt11_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_3'>通过</button>
+    <div id='div_pt11_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_3: 用例描述--&gt;储值开发票
+请求:/charge/receipt
+{"has_receipt": 1, "biz_id": "20180814105934007"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargeReceipt_2: 储值模块:储值是否开发票/charge/receipt</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_4'>通过</button>
+    <div id='div_pt11_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_4' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_4'>通过</button>
+    <div id='div_pt11_4' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_4: 用例描述--&gt;储值不开发票
+请求:/charge/receipt
+{"has_receipt": 2, "biz_id": "20180814105934007"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"result": "SUCCESS"}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargeRule_1: 储值模块:查看门店储值规则设置/charge/rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_5'>通过</button>
+    <div id='div_pt11_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_5' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_5'>通过</button>
+    <div id='div_pt11_5' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_5: 用例描述--&gt;查看门店储值规则设置
+请求:/charge/rule
+{"shop_id": 1905736354}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"content": [{"gift_percent": 0.13, "gift": [{"name": "绿茶礼品券", "value": 0, "number": "1"}], "money": 9, "price": "73", "credit": 0, "credit_percent": 0}, {"money": 10, "price": "100", "credit_percent": 0, "gift_percent": 0, "credit": 0}, {"money": 20, "price": "200", "credit_percent": 0, "gift_percent": 0, "credit": 0}, {"money": 50, "price": "500", "credit_percent": 0, "gift_percent": 0, "credit": 0}], "expired": "永久有效", "is_gift_diy": false}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargeView_1: 储值模块:储值记录详情/charge/view</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_6'>通过</button>
+    <div id='div_pt11_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_6' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_6'>通过</button>
+    <div id='div_pt11_6' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_6: 用例描述--&gt;查询指定流水号储值记录详情
+请求:/charge/view
+{"charge_id": "1608404535251075"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"status": "1", "pay_type": "1", "remark": "", "fee": "500000", "pay_time": "2018-08-10 17:41:35", "grade": "3009828", "biz_id": "", "cashier_id": "1180940478", "charge_id": "1608404535251075", "grade_name": "vip会员", "mixed_pay_info": null, "total_fee": "505000", "sid": "1905736354", "award_coupon": [], "cno": "1802326514043775", "has_receipt": "2", "type": "1", "award_fee": 5000}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testChargetoday_1: 储值模块:当日储值统计/charge/today</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_7'>通过</button>
+    <div id='div_pt11_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_7' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_7'>通过</button>
+    <div id='div_pt11_7' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_7: 用例描述--&gt;当日储值统计
+请求:/charge/today
+{"shop_id": "1905736354", "end_time": "18:00", "begin_time": "09:00"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": {"shop_offline": {"charge": {"fee": 100, "total_fee": 200, "award_fee": 100}}, "shop_online": null}, "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testPosChargedetail_1: 储值模块：查询指定流水号储值记录详情/pos/chargedetail</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_8'>通过</button>
+    <div id='div_pt11_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_8' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_8'>通过</button>
+    <div id='div_pt11_8' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt11_8: 用例描述--&gt;查询指定流水号储值记录详情/pos/chargedetail
+请求:/pos/chargedetail
+{"tcId": "71608222238572709"}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 10009, "errmsg": "尚未登录"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>testInterface.testActivity.TestActivity: 活动模块</td>
+    <td class="text-center">3</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">
+        <a href="javascript:showClassDetail('c12',3)" class="detail" id='c12'>详细</a>
+        <a href='javascript:hidden_case()' id="case_hidden_btn" style="display:none">展开所有</a>
+    </td>
+    
+</tr>
+
+<tr id='pt12_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testActivityGetuserthumbuplog_1: 活动接口:查询用户参与的集赞活动/activity/getuserthumbuplog</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_1'>通过</button>
+    <div id='div_pt12_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_1' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_1'>通过</button>
+    <div id='div_pt12_1' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt12_1: 用例描述--&gt;查询用户参与的集赞活动
+请求:/activity/getuserthumbuplog
+{"cno": "1802326514043775", "activity_id": 3032065}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": null, "errcode": 11001, "errmsg": "用户未参与该活动"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testActivityOtherlist_1: 异业营销:获取异业营销活动列表/activity/otherlist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_2'>通过</button>
+    <div id='div_pt12_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_2' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_2'>通过</button>
+    <div id='div_pt12_2' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt12_2: 用例描述--&gt;获取异业营销活动列表
+请求:/activity/otherlist
+{"page": 1}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"bname": "风之谷", "live_time": "", "id": "3092278", "coupons": [{"amount": 5, "num": 1, "type": "1", "couponid": "8934466", "name": "5元代金券"}], "name": "自动化测试异业营销风"}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>testActivitylist_1: 活动接口:获取活动列表/activity/list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_3'>通过</button>
+    <div id='div_pt12_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_3' type="button" title="点击按钮，展开或折叠该Case" class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_3'>通过</button>
+    <div id='div_pt12_3' class="in" align="left">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:1070px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt12_3: 用例描述--&gt;获取活动列表
+请求:/activity/list
+{"cno": "1802326514043775", "shop_id": 1905736354}
+Appid:dp3Go73mm5jUiuQaWDe4W
+响应:
+{"res": [{"name": "vip消费返券", "set_charge": false, "live_time": [], "amount": 20000, "type": 1, "id": "3082062", "coupons": [{"amount": "20", "num": 1, "type": "1", "couponid": "8927448", "name": "20元代金券"}]}], "errcode": 0, "errmsg": "OK"}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>75</td>
+    <td>75</td>
+    <td>0</td>
+    <td>0</td>
+    <td>通过率：100.00%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>

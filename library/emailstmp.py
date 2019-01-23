@@ -27,8 +27,8 @@ class EmailClass(object):
     '''
     配置邮件内容
     '''
-    @property
-    def setMailContent(self):
+
+    def setMailContent(self, html_path):
         print self.receivers
         msg = MIMEMultipart()
         msg['From'] = Header(self.From,'utf-8')
@@ -36,7 +36,8 @@ class EmailClass(object):
         msg['Subject'] = Header('%s%s'%(self.msg_title,self.curDateTime),'utf-8')
 
         #两个附件路径
-        reportfile = os.path.join(gl.reportPath, 'Report.html')
+        # reportfile = os.path.join(gl.reportPath, 'Report.html')
+        reportfile = html_path
         countPath = os.path.join(gl.reportPath,'count.xlsx')
 
         #增加邮件内容为html
@@ -87,10 +88,9 @@ class EmailClass(object):
             print "Error: 无法发送邮件.%s"%ex
 
     #发送调用
-    @property
-    def send(self):
-        self.sendEmail(self.setMailContent)
+    def send(self, file_path):
+        self.sendEmail(self.setMailContent(file_path))
 
 if __name__=="__main__":
-    EmailClass().send
+    EmailClass().send('')
 
